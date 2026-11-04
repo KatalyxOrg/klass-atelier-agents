@@ -405,7 +405,7 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
     <li><strong>Cliquez sur le prompt link de départ</strong> de l'exercice 1. Il ouvre un brouillon en Sonnet 5.5 : remplacez <code>[à compléter]</code> par votre prénom, lisez, puis envoyez. L'agent crée votre branche nominative, par exemple <code>camille/proposition</code> : c'est votre <strong>brouillon parallèle</strong>, il ne gêne personne.
       <p class="prompt-link" data-prompt-link="proposition-1"><span class="etiquette">Prompt link · exercice 1 Proposition</span><span class="a-venir">à venir</span></p>
     </li>
-    <li><strong>Écrivez votre brief</strong> dans le même thread, avec le gabarit en 7 rubriques. Votre livrable : <code>proposition/&lt;prénom&gt;/proposition.md</code>, un fichier Markdown. Le rendu en PDF viendra à l'exercice 2 : ne le demandez pas encore.</li>
+    <li><strong>Écrivez votre brief</strong> dans le même thread, avec le gabarit en 7 rubriques. Votre livrable : <code>proposition/&lt;prénom&gt;/proposition.md</code>, un fichier Markdown (un fichier texte simple, que le rendu mettra en page). Le rendu en PDF viendra à l'exercice 2 : ne le demandez pas encore.</li>
     <li><strong>Faites le test du collègue.</strong> Un associé arrivé ce matin saurait-il pour qui écrire, où trouver les prix, combien de pages faire, et quand vous appeler ?</li>
     <li><strong>Envoyez, puis ouvrez le fichier</strong> que l'agent a écrit (le panneau des fichiers de T3 Code l'affiche). Les prix sont-ils ceux de <code>sources/katalyx/tarifs.md</code> ? La cliente retrouverait-elle ses mots ?</li>
   </ol>
@@ -629,9 +629,9 @@ Ne rédige rien d'autre : mon brief arrive dans le message suivant. Réponds seu
   <p class="source">Si le temps presse, une seule dimension suffit : un juge, c'est un sous-agent de plus sur votre quota. Le PDF et les images restent dans votre dossier, hors de Git ; demandez à l'agent de vous ouvrir le PDF si vous voulez le voir.</p>
   <details>
     <summary>Le texte du prompt link de départ</summary>
-<pre class="prompt" id="prompt-proposition-2">J'en suis à l'exercice 2 du parcours Proposition de l'atelier. Mon prénom : [à compléter]. Ma proposition est dans proposition/prénom/proposition.md, sur ma branche prénom/proposition.
+<pre class="prompt" id="prompt-proposition-2">J'en suis à l'exercice 2 du parcours Proposition de l'atelier. Mon prénom : [à compléter]. Ma proposition est dans proposition/prénom/proposition.md : place-toi sur ma branche prénom/proposition si tu n'y es pas déjà.
 
-Prépare le rendu : si les dépendances de proposition/ ne sont pas encore installées, installe-les comme l'explique proposition/CLAUDE.md.
+Prépare ensuite le rendu : si les dépendances de proposition/ ne sont pas encore installées, installe-les comme l'explique proposition/CLAUDE.md.
 
 Ne rends rien encore et ne modifie pas ma proposition : la suite de mon brief arrive dans le message suivant. Réponds en une phrase quand c'est prêt.</pre>
   </details>
@@ -714,7 +714,9 @@ Ne rends rien encore et ne modifie pas ma proposition : la suite de mon brief ar
 
 1. Enregistre sur ma branche prénom/proposition le contenu de mon dossier proposition/prénom/ (la proposition et ses notes de grille, sans le dossier rendu/), puis pousse la branche sur GitHub.
 2. Ouvre une PR « relis-moi » vers main, intitulée « Relis-moi : proposition Brûlerie Caravelle (prénom) ». Dans sa description, dis en quelques lignes ce qui part et quand, résume les notes de la grille, et pose ma question au relecteur : [à compléter].
-3. Ne la fusionne pas. Donne-moi seulement son lien.</pre>
+3. Ne la fusionne pas. Donne-moi seulement son lien.
+
+Si quelque chose bloque (par exemple l'accès à GitHub), arrête-toi et dis-moi en une phrase ce que je dois faire.</pre>
   </details>
 <!-- FIN EMPLACEMENT orchestrer-proposition -->
 
