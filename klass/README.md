@@ -25,3 +25,7 @@ La charte de Klass by Katalyx, copiée pour ce dépôt. Elle s'applique à la pa
 ```
 
 Ces fichiers viennent de la charte maîtresse de Klass : on ne les modifie pas ici.
+
+## La mécanique de la page support
+
+`page.css` et `page.js` font marcher `index.html` : la frise des étapes, une étape affichée à la fois, le sélecteur de parcours (retenu par le navigateur), et les deux modes, lecture et présentation (touche **P**, flèches du clavier, Échap pour revenir). Le contenu reste dans `index.html`. La copie de référence de cette mécanique, avec son mode d'emploi pour un autre atelier, est dans le dossier `kit/` du dépôt `cours`.
