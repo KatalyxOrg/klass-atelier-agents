@@ -22,7 +22,7 @@ Un chiffre, un prix, une date ou un nom absent de ces fichiers ne s'invente pas 
 
 ## 2. Rédiger
 
-Écris `proposition/<prénom>/proposition.md` (le prénom de l'associé ; sans prénom, `proposition/brouillon/`). Le plan qui a gagné, dans cet ordre :
+Écris `proposition/<prénom>/proposition.md` (le prénom de l'associé ; s'il ne l'a pas donné, prends « brouillon » à la place). Le plan qui a gagné, dans cet ordre :
 1. Ce que vous nous avez dit : le besoin, avec les mots et les chiffres de la cliente.
 2. Ce que nous proposons, et ce que nous ne faisons pas.
 3. Ce que vous y gagnez, en chiffres tirés des sources.
