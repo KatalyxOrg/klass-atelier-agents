@@ -1,0 +1,15 @@
+/* Klass by Katalyx — polices embarquées, pour un rendu identique hors ligne (page, PDF, vidéo).
+   À charger après brand.css : les fichiers locaux priment alors sur Google Fonts. */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("polices/BricolageGrotesque.ttf") format("truetype");
+  font-weight: 200 800;
+  font-stretch: 75% 100%;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Schibsted Grotesk";
+  src: url("polices/SchibstedGrotesk.ttf") format("truetype");
+  font-weight: 400 900;
+  font-display: swap;
+}

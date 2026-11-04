@@ -1,0 +1,12 @@
+{
+  "name": "klass-atelier-agents",
+  "private": true,
+  "description": "Atelier Klass by Katalyx : faire travailler des agents en confiance",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "verifier-atelier": "node outils/verifier-atelier/index.mjs"
+  }
+}
