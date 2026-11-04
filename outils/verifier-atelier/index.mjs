@@ -15,7 +15,7 @@ import { mkdtempSync, readdirSync, rmSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { Ecart, executer } from './outils.mjs';
+import { Ecart, estEcart, executer } from './outils.mjs';
 
 const ICI = dirname(fileURLToPath(import.meta.url));
 const RACINE_LOCALE = resolve(ICI, '..', '..');
@@ -137,7 +137,7 @@ async function main() {
         const duree = ((Date.now() - debut) / 1000).toFixed(1);
         console.log(`  ✔ ${bilan ?? 'OK'} (${duree} s)`);
       } catch (erreur) {
-        const message = erreur instanceof Ecart ? erreur.message : (erreur?.stack ?? String(erreur));
+        const message = estEcart(erreur) ? erreur.message : (erreur?.stack ?? String(erreur));
         console.log(`  ✘ ${message.split('\n').join('\n    ')}`);
         console.log(`\n✘ verifier-atelier : écart au point ${point.numero}. Contrôle arrêté.`);
         process.exitCode = 1;
@@ -158,7 +158,7 @@ async function main() {
 }
 
 main().catch((erreur) => {
-  const message = erreur instanceof Ecart ? erreur.message : (erreur?.stack ?? String(erreur));
+  const message = estEcart(erreur) ? erreur.message : (erreur?.stack ?? String(erreur));
   console.error(`✘ verifier-atelier : ${message}`);
   process.exitCode = 1;
 });

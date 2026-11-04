@@ -5,8 +5,19 @@ import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-/** Erreur d'un point : son message est affiché tel quel, sans pile d'appels. */
-export class Ecart extends Error {}
+/**
+ * Erreur d'un point : son message est affiché tel quel, sans pile d'appels.
+ * On la reconnaît à son nom, car les points sont chargés depuis le clone
+ * (une autre copie de ce module que celle du lanceur).
+ */
+export class Ecart extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'Ecart';
+  }
+}
+
+export const estEcart = (erreur) => erreur?.name === 'Ecart';
 
 /**
  * Lance une commande et rend sa sortie. Lève un Ecart si elle échoue,
