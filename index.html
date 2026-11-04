@@ -359,11 +359,21 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
   </div>
 <!-- FIN EMPLACEMENT briefer-proposition -->
 
-<!-- EMPLACEMENT briefer-video : parcours Vidéo. Remplacer ce bloc par l'encart Vidéo et l'énoncé de l'exercice 1 Vidéo. -->
-  <div class="emplacement" data-emplacement="briefer-video">
-    <p><strong>À venir :</strong> l'énoncé de l'exercice 1, parcours Vidéo.</p>
+<!-- PARCOURS VIDÉO : exercice 1 -->
+  <div class="encart orange" data-parcours="video">
+    <p class="titre-encart">Parcours Vidéo · exercice 1 · environ 6 minutes</p>
+    <p><strong>Votre mission :</strong> briefer une vidéo de <strong>20 secondes</strong> qui présente la <strong>Brûlerie Caravelle</strong>, <strong>sans voix ni musique</strong>. Le projet Remotion est déjà prêt dans <code>video/</code> : votre agent n'a qu'à modifier la composition, il ne part pas de zéro. Ce que la cliente attend, et tout ce qu'il faut savoir sur elle, se trouve dans <code>sources/</code>.</p>
   </div>
-<!-- FIN EMPLACEMENT briefer-video -->
+  <ol class="etapes">
+    <li><strong>Cliquez sur le prompt link de départ.</strong> Il ouvre un brouillon pour le parcours Vidéo (le dossier <code>video/</code>), en Sonnet 5.5. L'agent y crée d'abord votre branche <code>prenom/video</code> (votre <strong>brouillon parallèle</strong>), puis attend votre brief. Le brief n'y est pas : c'est l'exercice.
+      <p class="prompt-link" data-prompt-link="exercice-1-video"><span class="etiquette">Prompt link · exercice 1 · parcours Vidéo</span><span class="a-venir">à venir</span></p>
+    </li>
+    <li><strong>Écrivez votre brief à la suite, à la main</strong>, avec le gabarit en 7 rubriques : l'objectif et le pourquoi ; pour qui ; les sources à lire ; le livrable (format et longueur) ; le périmètre et ce qu'il ne faut pas faire ; les critères de succès ; quand s'arrêter ou demander. Pour les critères de succès, écrivez-les en mots simples : la grille arrive à l'exercice 2.</li>
+    <li><strong>Passez le test du collègue.</strong> Un collègue qui ne connaît ni la cliente ni le projet comprendrait-il votre brief ? Fixez aussi le périmètre : ce que l'agent peut modifier, et ce qu'il ne touche pas.</li>
+    <li><strong>Envoyez, puis laissez l'agent travailler.</strong> Il lit les sources, écrit le contenu de la vidéo et la rend. Vous n'avez aucune commande à taper.</li>
+    <li><strong>Regardez la vidéo.</strong> Quand l'agent a fini, demandez-lui d'ouvrir <code>video/out/video.mp4</code>. Pour l'instant, c'est vous qui regardez à sa place : vous êtes son <strong>meat proxy</strong>. L'exercice 2 lui donne ses propres yeux.</li>
+  </ol>
+  <p><strong>Vous avez réussi si</strong> votre branche <code>prenom/video</code> existe, si vous avez regardé une vidéo de 20 secondes, et si chaque chiffre et chaque nom qu'elle affiche se retrouve dans <code>sources/</code>. Une seule passe suffit : ne demandez pas de variantes, vous n'avez pas le temps de les regarder.</p>
 
 </section>
 
@@ -398,11 +408,18 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
   </div>
 <!-- FIN EMPLACEMENT environnement-proposition -->
 
-<!-- EMPLACEMENT environnement-video : parcours Vidéo. Remplacer ce bloc par la présentation du CLAUDE.md de video/. -->
-  <div class="emplacement" data-emplacement="environnement-video">
-    <p><strong>À venir :</strong> le CLAUDE.md du parcours Vidéo.</p>
+<!-- PARCOURS VIDÉO : le CLAUDE.md de video/ -->
+  <div class="encart papier" data-parcours="video">
+    <p class="titre-encart">Parcours Vidéo · le CLAUDE.md de <code>video/</code></p>
+    <p>Le dossier <code>video/</code> a son propre CLAUDE.md, lu en plus de celui de la racine dès que l'agent y travaille. C'est lui que le check d'environnement de l'accueil a suivi pour installer ce qu'il faut. Il tient en quatre idées.</p>
+    <div class="cartes">
+      <div class="carte"><h4>Va chercher dans <code>sources/</code></h4><p>« Tout ce que la vidéo affirme vient de <code>sources/</code>, jamais de ta mémoire ni d'une valeur plausible. » Quand un chiffre manque, l'agent le dit au lieu de l'inventer.</p></div>
+      <div class="carte"><h4>Un projet déjà prêt</h4><p>« Tu modifies la composition, tu ne reconstruis pas le projet. » Pourquoi : un abonnement Claude Pro, donc des boucles courtes. Le contenu est dans <code>src/contenu.js</code>, la mise en page dans <code>src/Presentation.jsx</code>.</p></div>
+      <div class="carte"><h4>L'installation, expliquée</h4><p><code>npm ci</code> installe Remotion et React ; <code>npm run navigateur</code> télécharge le <strong>navigateur intégré</strong> (environ 120 Mo) qui dessine les images de la vidéo. Même chose sur Mac et sous Windows, une fois pour toutes.</p></div>
+      <div class="carte"><h4>Des portes à sens unique</h4><p>« Rien n'est envoyé au client, publié ni posté par toi […]. La vidéo « part chez le client demain » : elle n'est pas partie. » Les rendus (MP4, planche) restent hors de Git.</p></div>
+    </div>
+    <p>Une correction que vous redites à chaque vidéo (« pas de point d'exclamation », « le titre toujours en haut ») n'est plus une affaire de brief : c'est la <strong>première marche de l'escalade</strong>, elle va dans ce fichier.</p>
   </div>
-<!-- FIN EMPLACEMENT environnement-video -->
 
   <h3 id="source-de-verite">La source de vérité</h3>
   <p>La <strong>source de vérité</strong>, c'est le dossier où l'agent va chercher la vraie donnée (offres, tarifs, références) au lieu de deviner ou d'inventer. Ici, c'est <code>sources/</code> : la fiche de la Brûlerie Caravelle, son brief, les notes d'appel, nos offres, nos tarifs, nos références, et deux anciennes propositions, l'une gagnée et l'autre perdue. Un agent qui ne trouve pas une information dans la source de vérité la demande, il ne l'invente pas.</p>
@@ -461,11 +478,55 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
   </div>
 <!-- FIN EMPLACEMENT verification-proposition -->
 
-<!-- EMPLACEMENT verification-video : parcours Vidéo. Remplacer ce bloc par l'encart Vidéo et l'énoncé de l'exercice 2 Vidéo. -->
-  <div class="emplacement" data-emplacement="verification-video">
-    <p><strong>À venir :</strong> l'énoncé de l'exercice 2, parcours Vidéo.</p>
+<!-- PARCOURS VIDÉO : des yeux et une grille, exercice 2 -->
+  <div class="encart papier" data-parcours="video">
+    <p class="titre-encart">Parcours Vidéo · des yeux et une grille</p>
+    <h4>Les yeux : le rendu et la planche contact</h4>
+    <p>Une vidéo ne se lit pas comme un texte : l'agent a besoin de la voir. Le projet lui donne deux outils, que l'associé n'a aucune commande à taper : <code>npm run rendre</code> fabrique le MP4, et <code>npm run planche</code> en tire une <strong>planche contact</strong>, une seule image de 10 vignettes, une toutes les 2 secondes. L'agent l'ouvre comme on ouvre une photo.</p>
+    <div class="tableau">
+    <table>
+      <thead><tr><th colspan="5">Les vignettes se lisent de gauche à droite, puis de haut en bas</th></tr></thead>
+      <tbody>
+        <tr><td>case 1 · 1 s</td><td>case 2 · 3 s</td><td>case 3 · 5 s</td><td>case 4 · 7 s</td><td>case 5 · 9 s</td></tr>
+        <tr><td>case 6 · 11 s</td><td>case 7 · 13 s</td><td>case 8 · 15 s</td><td>case 9 · 17 s</td><td>case 10 · 19 s</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4>La grille Vidéo : quatre dimensions, notées 1, 3 ou 5</h4>
+    <p>La grille est dans <code>video/grille-video.md</code>. Chaque note a une <strong>ancre</strong> qui dit à quoi elle ressemble.</p>
+    <div class="tableau">
+    <table>
+      <thead><tr><th>Dimension</th><th>La question</th><th>Ce qu'est un 5, en bref</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Lisibilité</strong></td><td>Le texte se lit-il d'un coup d'œil sur un téléphone ?</td><td>Contraste net, marges, une idée par scène, 12 mots au plus</td></tr>
+        <tr><td><strong>Charte</strong></td><td>La vidéo suit-elle la charte Klass ?</td><td>Encre, orange, papier, blanc ; les deux polices ; le logo entier, sur fond sombre en version <code>-on-dark</code></td></tr>
+        <tr><td><strong>Rythme</strong></td><td>Les 20 secondes sont-elles bien réparties ?</td><td>20 secondes pile ; chaque scène assez longue pour être lue et neuve par rapport à la précédente</td></tr>
+        <tr><td><strong>Message</strong></td><td>Dit-elle ce que la cliente veut qu'elle dise ?</td><td>Qui, ce qui la distingue, ce qui est annoncé, quoi faire ; chaque chiffre vient des sources</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Chaque dimension est notée par un <strong>juge séparé</strong> : un sous-agent au contexte neuf, qui ne reçoit que la planche et ses ancres. Il peut répondre <strong>« Inconnu »</strong> et il cite les cases qui justifient sa note. La planche ne montre que des images fixes : tout ce qui dépend du mouvement reste « Inconnu ». Le piège du <strong>hill climbing</strong> vaut ici aussi : à force de corriger pour la grille, on finit par soigner la grille plutôt que la vidéo. D'où un humain qui regarde la vraie vidéo avant qu'elle parte.</p>
   </div>
-<!-- FIN EMPLACEMENT verification-video -->
+
+  <div class="encart orange" data-parcours="video">
+    <p class="titre-encart">Parcours Vidéo · exercice 2 · environ 7 minutes</p>
+    <p><strong>Votre mission :</strong> donner à votre agent <strong>des yeux et une grille</strong>, puis le laisser corriger sa vidéo une fois.</p>
+  </div>
+  <ol class="etapes">
+    <li><strong>Cliquez sur le prompt link de départ.</strong> Il vous remet sur votre branche <code>prenom/video</code>, dans le dossier <code>video/</code>, en Sonnet 5.5, et vous laisse écrire la suite : le brief de la correction n'y est pas.
+      <p class="prompt-link" data-prompt-link="exercice-2-video"><span class="etiquette">Prompt link · exercice 2 · parcours Vidéo</span><span class="a-venir">à venir</span></p>
+    </li>
+    <li><strong>Complétez votre brief avec trois choses.</strong>
+      <ul>
+        <li><strong>Les yeux :</strong> le rendu Remotion et la planche contact. Le CLAUDE.md de <code>video/</code> explique à l'agent comment les fabriquer : dites-lui seulement de s'en servir.</li>
+        <li><strong>La grille :</strong> les critères de succès deviennent ceux de <code>video/grille-video.md</code>. Visez 5.</li>
+        <li><strong>Les juges et le budget :</strong> deux dimensions de votre choix, chacune notée par un juge séparé (deux, pas quatre, pour ménager votre quota), et <strong>une seule boucle de correction</strong>.</li>
+      </ul>
+    </li>
+    <li><strong>Envoyez, puis lisez les notes.</strong> Pour chaque dimension, l'agent vous rapporte une note ou « Inconnu », avec les cases citées. Demandez à l'agent d'ouvrir <code>video/out/planche-contact.png</code> et retrouvez ces cases vous-même.</li>
+    <li><strong>Jugez à votre tour.</strong> Êtes-vous d'accord avec les juges ? Une correction vous semble-t-elle manquer ? Vous n'avez pas besoin de relancer : notez-le, c'est l'échantillonnage humain dont on parlait.</li>
+  </ol>
+  <p><strong>Vous avez réussi si</strong> <code>video/out/planche-contact.png</code> existe, si deux dimensions ont une note citant des cases, et si la vidéo a été corrigée une fois d'après ces notes. Les rendus restent dans <code>out/</code> : ils ne vont pas dans Git.</p>
 
 </section>
 
@@ -524,11 +585,20 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
   </div>
 <!-- FIN EMPLACEMENT orchestrer-proposition -->
 
-<!-- EMPLACEMENT orchestrer-video : parcours Vidéo. Remplacer ce bloc par l'énoncé de l'exercice 3 Vidéo. -->
-  <div class="emplacement" data-emplacement="orchestrer-video">
-    <p><strong>À venir :</strong> l'énoncé de l'exercice 3, parcours Vidéo.</p>
+<!-- PARCOURS VIDÉO : exercice 3 -->
+  <div class="encart orange" data-parcours="video">
+    <p class="titre-encart">Parcours Vidéo · exercice 3 · environ 4 minutes</p>
+    <p><strong>Le scénario :</strong> votre vidéo part chez le client demain. Avant cette <strong>porte à sens unique</strong>, vous demandez à un associé de la relire. <strong>Votre mission :</strong> faire ouvrir votre <strong>PR « relis-moi »</strong> par votre agent, puis relire et commenter celle de l'associé suivant, <strong>sans fusionner</strong>.</p>
   </div>
-<!-- FIN EMPLACEMENT orchestrer-video -->
+  <ol class="etapes">
+    <li><strong>Cliquez sur le prompt link de départ.</strong> Il vous remet sur votre branche <code>prenom/video</code>, pose le scénario (« ma vidéo part chez le client demain ») et vous laisse écrire la demande.
+      <p class="prompt-link" data-prompt-link="exercice-3-video"><span class="etiquette">Prompt link · exercice 3 · parcours Vidéo</span><span class="a-venir">à venir</span></p>
+    </li>
+    <li><strong>Demandez l'ouverture de la PR.</strong> Dans votre demande, dites ce qui part demain, ce que la personne qui relit doit regarder, et que le MP4 ne va pas dans Git : il circule par Chat ou Drive, la PR dit seulement où le trouver. Précisez aussi que personne ne fusionne.</li>
+    <li><strong>Relisez la PR de l'associé suivant</strong> (A relit B, B relit C, C relit A). Sur GitHub, lisez sa description puis les fichiers modifiés, surtout <code>video/src/contenu.js</code> : retrouvez-vous chaque chiffre et chaque nom dans <code>sources/</code> ? Si vous voulez voir la vidéo, demandez le MP4 à son auteur.</li>
+    <li><strong>Commentez, sans fusionner.</strong> Laissez deux commentaires : une chose qui marche, et une question ou un point à changer.</li>
+  </ol>
+  <p><strong>Vous avez réussi si</strong> votre PR est ouverte avec une description claire, si l'onglet des fichiers modifiés ne contient ni MP4 ni planche contact, et si vous avez commenté la PR d'un autre sans la fusionner.</p>
 
   <h3>« Pourquoi pas Cowork ? »</h3>
   <p>La question est légitime. <strong>Cowork</strong>, dans Claude Desktop, est pensé pour les non-développeurs, et ses tâches planifiées tournent dans le cloud, même ordinateur éteint. Mais il ne fonctionne qu'avec Claude, il n'intègre pas Git, et ses sessions ne se partagent pas.</p>
