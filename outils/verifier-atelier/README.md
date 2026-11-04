@@ -20,10 +20,10 @@ Limite assumée : le contrôle est écrit en Node pour rester portable, mais il 
 | N° | Point | Fichier |
 |---|---|---|
 | 1 | Installation des dépendances depuis zéro (chaque dossier suivi qui a un `package.json`) | `points/1-installation.mjs` |
-| 2 | Rendu de la proposition : PDF d'au moins une page, une image PNG par page | à venir (parcours Proposition) |
+| 2 | Rendu de la proposition d'exemple : PDF d'au moins une page, une image PNG non vide par page, avec le Chrome headless de Playwright (pas Poppler) | `points/2-rendu-proposition.mjs` |
 | 3 | Vidéo de départ : 20 s à ±0,5 s, à la résolution attendue | à venir (parcours Vidéo) |
 | 4 | Planche contact : présente, aux dimensions attendues | à venir (parcours Vidéo) |
-| 5 | Skill `/proposition-klass` : en-tête valide, fichiers référencés présents | à venir (parcours Proposition) |
+| 5 | Skill `/proposition-klass` : seule skill du dépôt, en-tête valide (`name`, `description`), fichiers référencés présents (dont la grille et le script de rendu) | `points/5-skill-proposition.mjs` |
 | 6 | Branche de démo pré-notée : sur le remote, une note par dimension | à venir (mise en ligne) |
 | 7 | Prompt links : 8 000 caractères au plus, `repo`, `provider` et `model` attendus, aucun caractère invisible. Passe à vide tant qu'aucun lien n'est posé | `points/7-prompt-links.mjs` |
 | 8 | Aucune mention de l'autre marque de Katalyx (contenu, chemins, messages de commit) | `points/8-aucune-mention.mjs` |

@@ -58,7 +58,7 @@ tr.total td{font-weight:700;border-bottom:2px solid var(--klass-ink)}
 /* Sections */
 section.partie{padding:72px 0 8px;border-bottom:1px solid var(--klass-border)}
 .entete-partie{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;margin-bottom:20px}
-.entete-partie .numero{font-family:var(--klass-font-display);font-weight:800;font-size:15px;color:var(--klass-white);background:var(--klass-orange);border-radius:6px;padding:2px 8px}
+.entete-partie .numero{font-family:var(--klass-font-display);font-weight:800;font-size:15px;color:var(--klass-white);background:var(--klass-orange-strong);border-radius:6px;padding:2px 8px}
 .entete-partie .minutes{font-weight:600;color:var(--klass-muted);font-size:15px}
 .chapeau{font-size:19px;color:var(--klass-muted)}
 
@@ -114,7 +114,7 @@ figure.schema figcaption{font-size:14px;color:var(--klass-muted);margin-top:8px}
 .escalade li .quand{font-family:var(--klass-font-display);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--klass-orange-strong)}
 .escalade li strong{font-family:var(--klass-font-display);font-size:20px;font-weight:800;line-height:1.15}
 .escalade li span:last-child{font-size:14px;color:var(--klass-muted)}
-.escalade li.actif{background:var(--klass-orange);color:var(--klass-white)}
+.escalade li.actif{background:var(--klass-orange-strong);color:var(--klass-white)}
 .escalade li.actif .quand,.escalade li.actif span:last-child{color:var(--klass-white)}
 .escalade li.au-dela{background:none;border:2px dashed var(--klass-border)}
 @media (max-width:900px){.escalade{grid-template-columns:1fr 1fr}}
@@ -346,17 +346,78 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
   <div class="entete-partie"><span class="numero">3</span><h2>Briefer et exercice 1</h2><span class="minutes">12 min</span></div>
 
 <!-- EMPLACEMENT briefer-commun : parcours Proposition. Remplacer ce bloc par le gabarit de brief, le test du collègue, le pourquoi d'une consigne, le périmètre et la longueur. -->
-  <div class="emplacement" data-emplacement="briefer-commun">
-    <p><strong>À venir :</strong> le gabarit de brief en 7 rubriques et la démonstration.</p>
+  <p class="chapeau">Un agent ne lit pas dans vos pensées. Il fait ce qu'on lui dit, avec ce qu'on lui donne : le brief est le premier barreau de l'échelle de confiance.</p>
+
+  <h3>Briefer, pas « prompter »</h3>
+  <p>Anthropic demande de traiter Claude comme <strong>un nouveau collaborateur brillant, mais qui ne connaît ni vos habitudes ni vos dossiers</strong>. On ne cherche donc pas une formule magique, et c'est pour cela qu'on ne dit pas « prompter » : on <strong>briefe</strong> l'agent comme on brieferait une recrue arrivée ce matin. Un bon brief se reconnaît à ce qu'il contient, pas à ses mots-clés.</p>
+
+  <h3>Le gabarit en 7 rubriques</h3>
+  <div class="tableau">
+  <table>
+    <thead><tr><th>Rubrique</th><th>Ce qu'on y écrit</th><th>Pourquoi, et d'où ça vient</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Objectif et pourquoi</strong></td><td>Ce qu'on veut obtenir, et à quoi ça va servir.</td><td>Le pourquoi aide le modèle à faire les bons choix là où le brief ne dit rien. <span class="source">Anthropic, <em>Prompting best practices</em> : donner le contexte et la motivation.</span></td></tr>
+      <tr><td><strong>2. Pour qui</strong></td><td>Le lecteur ou le décideur, et ce qui compte pour lui.</td><td>Le ton, la longueur et les arguments en dépendent. <span class="source">Anthropic : le collaborateur brillant qui ne connaît pas vos clients.</span></td></tr>
+      <tr><td><strong>3. Sources à lire</strong></td><td>Les fichiers où se trouve la vraie donnée : ici, <code>sources/</code>.</td><td>L'agent va chercher l'information au moment où il en a besoin, au lieu de la deviner. <span class="source">Anthropic, <em>Effective context engineering for AI agents</em>.</span></td></tr>
+      <tr><td><strong>4. Livrable</strong></td><td>Le format, l'endroit où le ranger, et la longueur.</td><td>Les modèles récents écrivent volontiers plus long que nécessaire. <span class="source">Anthropic, guide de Claude Opus 5 : ajuster la longueur à ce que la tâche demande.</span></td></tr>
+      <tr><td><strong>5. Périmètre</strong></td><td>Ce qu'on fait, et ce qu'on ne fait <strong>pas</strong>.</td><td>Les modèles récents ont tendance à élargir la tâche. <span class="source">Anthropic, guide de Claude Opus 5 : livrer ce qui est demandé, au périmètre demandé.</span></td></tr>
+      <tr><td><strong>6. Critères de succès</strong></td><td>À quoi on reconnaîtra un bon résultat : bientôt, la grille.</td><td>Un agent ne peut juger son travail que s'il sait ce qu'on attend. <span class="source">Poteto ; Anthropic, <em>Demystifying evals for AI agents</em>.</span></td></tr>
+      <tr><td><strong>7. Quand s'arrêter ou demander</strong></td><td>Les informations à ne pas inventer, et les portes à sens unique.</td><td>L'agent sait où s'arrête sa liberté. <span class="source">Anthropic, <em>Prompting best practices</em> ; les portes à sens unique de Bezos, reprises par Poteto.</span></td></tr>
+    </tbody>
+  </table>
   </div>
+
+  <h3>Le test du collègue</h3>
+  <div class="citation">Montrez votre brief à un collègue qui n'a aucun contexte. S'il est perdu, l'agent le sera aussi.
+    <footer>D'après Anthropic, <em>Prompting best practices</em>.</footer></div>
+  <p>Avant d'envoyer, relisez votre brief avec les yeux d'un associé arrivé ce matin : saurait-il pour qui il écrit, où trouver les prix, combien de pages faire, et quand vous appeler ? Si une réponse manque, il manque une rubrique.</p>
+
+  <h3>Le pourquoi plutôt que les majuscules</h3>
+  <div class="deux-colonnes">
+    <div class="encart papier">
+      <p class="titre-encart">Une règle</p>
+      <p>« JAMAIS de prix TTC seul !!! »</p>
+      <p>L'agent obéit à la lettre, sans comprendre. Devant un cas que la règle n'a pas prévu, il devine.</p>
+    </div>
+    <div class="encart orange">
+      <p class="titre-encart">Une consigne avec son pourquoi</p>
+      <p>« Affiche les prix hors taxes, avec le total TTC en dessous : la cliente compare des devis HT, et elle doit retrouver le montant de son budget. »</p>
+      <p>L'agent sait ce qu'on cherche, et il l'applique aussi là où on n'avait pas pensé à le dire.</p>
+    </div>
+  </div>
+  <p class="source">L'exemple d'Anthropic : plutôt que « NEVER use ellipses », expliquer que le texte sera lu par une synthèse vocale, qui ne sait pas prononcer les points de suspension. « Claude can generalize from the explanation. »</p>
+
+  <h3>Fixer le périmètre et la longueur</h3>
+  <p>Les modèles récents se vérifient déjà seuls, mais ils ont deux pentes : <strong>élargir le périmètre</strong> (une refonte du site en prime) et <strong>écrire long</strong> (quatorze pages au lieu de trois). Le remède n'est pas de demander des relectures après coup : c'est d'écrire dans le brief ce qu'on veut, et ce qu'on ne veut pas. « Trois pages au plus. Seulement ce fichier. Pas de refonte de la boutique. »</p>
+
+  <h3>La démonstration</h3>
+  <p>Le formateur tape en direct le brief de la proposition commerciale de la Brûlerie Caravelle, rubrique par rubrique, en disant à voix haute pourquoi chacune est là. Il ne le colle pas : un bon brief s'écrit en quelques minutes. Le texte de référence est dans <code>outils/antiseche-brief-demo.md</code>, pour le relire après la séance.</p>
 <!-- FIN EMPLACEMENT briefer-commun -->
 
   <h3>Exercice 1 · briefer</h3>
 
 <!-- EMPLACEMENT briefer-proposition : parcours Proposition. Remplacer ce bloc par l'énoncé de l'exercice 1 Proposition. -->
-  <div class="emplacement" data-emplacement="briefer-proposition">
-    <p><strong>À venir :</strong> l'énoncé de l'exercice 1, parcours Proposition.</p>
+  <div class="encart papier">
+    <p class="titre-encart">Parcours Proposition · 6 min</p>
+    <p><strong>L'objectif :</strong> faire rédiger par votre agent la proposition commerciale de la Brûlerie Caravelle, à partir de la <strong>source de vérité</strong> (<code>sources/</code>), avec <strong>votre</strong> brief. Le brief, c'est l'exercice : personne ne vous le donne.</p>
   </div>
+  <ol class="etapes">
+    <li><strong>Cliquez sur le prompt link de départ</strong> de l'exercice 1. Il ouvre un brouillon en Sonnet 5.5 : remplacez <code>[à compléter]</code> par votre prénom, lisez, puis envoyez. L'agent crée votre branche nominative, par exemple <code>camille/proposition</code> : c'est votre <strong>brouillon parallèle</strong>, il ne gêne personne.
+      <p class="prompt-link" data-prompt-link="proposition-1"><span class="etiquette">Prompt link · exercice 1 Proposition</span><span class="a-venir">à venir</span></p>
+    </li>
+    <li><strong>Écrivez votre brief</strong> dans le même thread, avec le gabarit en 7 rubriques. Votre livrable : <code>proposition/&lt;prénom&gt;/proposition.md</code>, un fichier Markdown. Le rendu en PDF viendra à l'exercice 2 : ne le demandez pas encore.</li>
+    <li><strong>Faites le test du collègue.</strong> Un associé arrivé ce matin saurait-il pour qui écrire, où trouver les prix, combien de pages faire, et quand vous appeler ?</li>
+    <li><strong>Envoyez, puis ouvrez le fichier</strong> que l'agent a écrit (le panneau des fichiers de T3 Code l'affiche). Les prix sont-ils ceux de <code>sources/katalyx/tarifs.md</code> ? La cliente retrouverait-elle ses mots ?</li>
+  </ol>
+  <p class="source">Si vous avez fini en avance : notez ce que vous auriez ajouté à votre brief en voyant le résultat. C'est la matière de l'exercice 2, et peut-être de votre futur CLAUDE.md.</p>
+  <details>
+    <summary>Le texte du prompt link de départ</summary>
+<pre class="prompt" id="prompt-proposition-1">Je commence l'exercice 1 du parcours Proposition de l'atelier. Mon prénom : [à compléter].
+
+Crée ma branche nominative à partir de main, nommée prénom/proposition (en minuscules et sans accent), et place-toi dessus. Crée aussi le dossier proposition/prénom/.
+
+Ne rédige rien d'autre : mon brief arrive dans le message suivant. Réponds seulement par le nom de la branche.</pre>
+  </details>
 <!-- FIN EMPLACEMENT briefer-proposition -->
 
 <!-- EMPLACEMENT briefer-video : parcours Vidéo. Remplacer ce bloc par l'encart Vidéo et l'énoncé de l'exercice 1 Vidéo. -->
@@ -393,9 +454,19 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
   <p>Remarquez la forme : pas de règles en majuscules, mais du <strong>contexte</strong>, avec le pourquoi.</p>
 
 <!-- EMPLACEMENT environnement-proposition : parcours Proposition. Remplacer ce bloc par la présentation du CLAUDE.md de proposition/. -->
-  <div class="emplacement" data-emplacement="environnement-proposition">
-    <p><strong>À venir :</strong> le CLAUDE.md du parcours Proposition.</p>
+  <h3>Le CLAUDE.md du parcours Proposition</h3>
+  <p>Le dossier <code>proposition/</code> a son propre <code>CLAUDE.md</code>. L'agent le lit <strong>en plus</strong> de celui de la racine dès qu'il travaille dans ce dossier. Ce qu'il y trouve, c'est ce qu'un associé expliquerait à un nouveau venu le premier jour :</p>
+  <div class="cartes">
+    <div class="carte"><h4>Installer</h4><p>Les dépendances du rendu et le <strong>navigateur intégré</strong> (un Chrome sans fenêtre d'environ 120 Mo), sur Mac comme sous Windows. C'est l'agent qui installe : c'est ce qu'a fait le check d'environnement de l'accueil.</p></div>
+    <div class="carte"><h4>Rédiger</h4><p>Où ranger une proposition (<code>proposition/&lt;prénom&gt;/</code>), la forme que le rendu comprend, les prix seulement depuis nos tarifs, et <code>[à demander : …]</code> pour ce qui manque.</p></div>
+    <div class="carte"><h4>Rendre et noter</h4><p>Comment rendre le PDF et ses images, pourquoi les regarder, comment noter avec la grille, et des boucles courtes pour préserver le quota Claude Pro.</p></div>
+    <div class="carte"><h4>Git et Drive</h4><p>Le PDF ne va pas dans Git : il circule par Drive ou Chat. Envoyer au client reste une porte à sens unique. La PR « relis-moi » ne se fusionne pas par l'agent.</p></div>
   </div>
+  <div class="encart papier">
+    <p class="titre-encart">Extrait de <code>proposition/CLAUDE.md</code></p>
+    <p>« Ouvre ensuite les images : c'est exactement ce que la cliente verra. Un tableau coupé, un titre seul en bas de page, un texte qui déborde ne se voient que là. Corrige la source Markdown, jamais le PDF, puis rends à nouveau. »</p>
+  </div>
+  <p>Chaque consigne vient avec son pourquoi. Et rien de tout cela n'a besoin d'être redit dans vos briefs : c'est du <strong>contexte permanent</strong>.</p>
 <!-- FIN EMPLACEMENT environnement-proposition -->
 
 <!-- EMPLACEMENT environnement-video : parcours Vidéo. Remplacer ce bloc par la présentation du CLAUDE.md de video/. -->
@@ -430,7 +501,7 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
   <h3>Une demande, pas une garantie</h3>
   <p>CLAUDE.md est <strong>du contexte, pas un verrou</strong>. L'agent le lit et le suit presque toujours, mais rien ne l'y oblige mécaniquement. Quand une action doit être bloquée à coup sûr, on passe par un <strong>hook</strong> : un petit script que Claude Code déclenche avant une action et qui peut l'empêcher. Nous n'en montrons pas aujourd'hui ; retenez seulement que le vrai verrou existe, et qu'il se pose au-delà de CLAUDE.md.</p>
 
-  <h3>La première marche de l'escalade</h3>
+  <h3>Le deuxième barreau de l'escalade</h3>
   <p>Quand l'agent ne fait pas ce qu'on veut, on réfléchit dans un ordre précis : l'<strong>escalade brief → contexte permanent → skill</strong>.</p>
   <figure class="schema">
     <ol class="escalade" aria-label="L'escalade brief → contexte permanent → skill">
@@ -440,7 +511,7 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
       <li class="au-dela"><span class="quand">Au-delà</span><strong>Script ou hook</strong><span>Ce qui doit arriver à coup sûr</span></li>
     </ol>
   </figure>
-  <p>La première marche, c'est elle : <strong>une correction faite deux fois va dans CLAUDE.md</strong>. Si vous redites « jamais de prix sans la mention HT » à chaque proposition, ce n'est plus un problème de brief, c'est du contexte permanent. Une skill ne vient qu'après, et seulement pour un workflow précis que l'agent ne connaît pas : nous y reviendrons en clôture.</p>
+  <p>Le premier barreau, c'est le brief. Le deuxième, celui de cette partie : <strong>une correction faite deux fois va dans CLAUDE.md</strong>. Si vous redites « jamais de prix sans la mention HT » à chaque proposition, ce n'est plus un problème de brief, c'est du contexte permanent. Une skill, le troisième et dernier barreau, ne vient qu'après, et seulement pour un workflow précis que l'agent ne connaît pas : nous y reviendrons en clôture.</p>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -448,17 +519,122 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
   <div class="entete-partie"><span class="numero">5</span><h2>Vérification et exercice 2</h2><span class="minutes">15 min</span></div>
 
 <!-- EMPLACEMENT verification-commun : parcours Proposition. Remplacer ce bloc par la tension, des yeux et une grille, le hill climbing et le juge d'un autre fournisseur. -->
-  <div class="emplacement" data-emplacement="verification-commun">
-    <p><strong>À venir :</strong> des yeux et une grille, et les démonstrations.</p>
+  <p class="chapeau">Le moment fort de la séance : comment un agent peut juger son propre travail, sans qu'on lui dise « vérifie ».</p>
+
+  <h3>La tension</h3>
+  <div class="deux-colonnes">
+    <div class="encart papier">
+      <p class="titre-encart">Anthropic</p>
+      <p>Les modèles récents <strong>vérifient déjà leur travail seuls</strong>. Leur écrire « vérifie ton travail » ou « relis-toi » les pousse à la <strong>sur-vérification</strong> : ils tournent en rond, et coûtent plus cher.</p>
+      <p class="source">Guide de prompting de Claude Opus 5.</p>
+    </div>
+    <div class="encart papier">
+      <p class="titre-encart">Poteto</p>
+      <p>La vérification est <strong>la compétence n°1</strong> pour faire confiance à des agents. Sans elle, l'humain reste le <strong>meat proxy</strong> entre l'agent et le résultat.</p>
+      <p class="source">Live de Poteto avec Matt Pocock.</p>
+    </div>
   </div>
+  <div class="encart sombre">
+    <p class="titre-encart">La résolution : des yeux et une grille</p>
+    <p>Les deux ont raison, parce qu'ils ne parlent pas de la même chose. On ne dit pas à l'agent « vérifie » : on lui donne <strong>des yeux</strong>, le rendu réel de son travail (les pages du PDF en images), et <strong>une grille</strong>, des critères notés par des juges séparés. Anthropic va dans le même sens : la vision du modèle est meilleure quand il a des outils pour regarder son rendu.</p>
+  </div>
+
+  <h3>Sans yeux, pas de boucle</h3>
+  <p>Aujourd'hui, qui regarde le PDF ? Vous. Vous l'ouvrez, vous voyez le tableau coupé, vous le dites à l'agent, il corrige, vous rouvrez. Vous êtes le <strong>meat proxy</strong> : l'agent ne voit rien de ce qu'il produit, et chaque tour passe par vous. Donnez-lui les yeux, et la boucle tourne sans vous.</p>
+  <figure class="schema">
+    <svg viewBox="0 0 760 190" role="img" aria-labelledby="boucle-titre">
+      <title id="boucle-titre">La boucle des yeux : rédiger, rendre, regarder, corriger, puis rendre à nouveau</title>
+      <defs><marker id="fleche" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0B0B0B"/></marker></defs>
+      <g font-family="Bricolage Grotesque, system-ui, sans-serif">
+        <rect x="0" y="40" width="160" height="76" rx="12" fill="#F2F2F2"/>
+        <text x="80" y="72" text-anchor="middle" font-size="20" font-weight="800" fill="#0B0B0B">Rédiger</text>
+        <text x="80" y="96" text-anchor="middle" font-size="13" fill="#575757" font-family="Schibsted Grotesk, system-ui, sans-serif">le Markdown</text>
+        <rect x="200" y="40" width="160" height="76" rx="12" fill="#F2F2F2"/>
+        <text x="280" y="72" text-anchor="middle" font-size="20" font-weight="800" fill="#0B0B0B">Rendre</text>
+        <text x="280" y="96" text-anchor="middle" font-size="13" fill="#575757" font-family="Schibsted Grotesk, system-ui, sans-serif">PDF, une image par page</text>
+        <rect x="400" y="40" width="160" height="76" rx="12" fill="#B53A1C"/>
+        <text x="480" y="72" text-anchor="middle" font-size="20" font-weight="800" fill="#FFFFFF">Regarder</text>
+        <text x="480" y="96" text-anchor="middle" font-size="13" fill="#FFFFFF" font-family="Schibsted Grotesk, system-ui, sans-serif">les yeux : les images</text>
+        <rect x="600" y="40" width="160" height="76" rx="12" fill="#F2F2F2"/>
+        <text x="680" y="72" text-anchor="middle" font-size="20" font-weight="800" fill="#0B0B0B">Corriger</text>
+        <text x="680" y="96" text-anchor="middle" font-size="13" fill="#575757" font-family="Schibsted Grotesk, system-ui, sans-serif">la source</text>
+      </g>
+      <g stroke="#0B0B0B" stroke-width="2" fill="none">
+        <line x1="162" y1="78" x2="196" y2="78" marker-end="url(#fleche)"/>
+        <line x1="362" y1="78" x2="396" y2="78" marker-end="url(#fleche)"/>
+        <line x1="562" y1="78" x2="596" y2="78" marker-end="url(#fleche)"/>
+        <path d="M680,118 L680,160 L280,160 L280,122" marker-end="url(#fleche)"/>
+      </g>
+      <text x="480" y="182" text-anchor="middle" font-size="13" fill="#575757" font-family="Schibsted Grotesk, system-ui, sans-serif">Deux tours au plus en séance : le quota Claude Pro est limité.</text>
+    </svg>
+    <figcaption>Dans l'atelier, c'est l'agent qui lance le rendu : <code>proposition/outils/rendre.mjs</code> produit le PDF aux couleurs Klass, puis une image par page, avec le navigateur intégré.</figcaption>
+  </figure>
+  <p><strong>Démo des yeux :</strong> le formateur fait rendre sa proposition, l'agent ouvre les images, liste ce que la cliente verrait de travers (un tableau coupé, un titre seul en bas de page), corrige la source et rend à nouveau.</p>
+
+  <h3>La grille</h3>
+  <p>Les yeux montrent <em>ce qui est</em> ; la grille dit <em>ce qui est bien</em>. La grille Proposition (<code>proposition/grille-proposition.md</code>) note <strong>7 dimensions</strong>, chacune de 1 à 5, avec une description concrète de ce que valent le 1, le 3 et le 5 :</p>
+  <div class="tableau">
+  <table>
+    <thead><tr><th>Dimension</th><th>La question qu'elle pose</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Compréhension du besoin</strong> ★</td><td>La cliente retrouve-t-elle ses mots et ses chiffres ?</td></tr>
+      <tr><td><strong>2. Valeur chiffrée</strong></td><td>Voit-elle ce qu'elle y gagne, en chiffres tirés des sources ?</td></tr>
+      <tr><td><strong>3. Preuves</strong></td><td>Nos références sont-elles réelles, proches et chiffrées ?</td></tr>
+      <tr><td><strong>4. Clarté du prix et du périmètre</strong> ★</td><td>Sait-elle exactement ce qu'elle achète, et combien ?</td></tr>
+      <tr><td><strong>5. Prochaines étapes datées</strong></td><td>Sait-elle quoi faire, et quand ? Le calendrier tient-il ?</td></tr>
+      <tr><td><strong>6. Ton et charte Klass</strong> ★</td><td>Lui parle-t-on comme elle aime, dans un document Klass ?</td></tr>
+      <tr><td><strong>7. Longueur</strong></td><td>La longueur sert-elle sa décision ?</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="cartes">
+    <div class="carte"><h4>Un juge par dimension</h4><p>Chaque dimension est notée par un <strong>juge isolé</strong>, un sous-agent dans un contexte neuf qui n'a pas vu la rédaction. Il note ce que la cliente lira, pas ce que l'auteur a voulu écrire.</p></div>
+    <div class="carte"><h4>Il cite le passage</h4><p>Le juge fonde sa note sur une phrase précise, avec sa page. Une note sans citation ne se discute pas, donc ne sert à rien.</p></div>
+    <div class="carte"><h4>« Inconnu » est permis</h4><p>Si ce qu'il a reçu ne suffit pas, le juge répond « Inconnu ». Une note devinée est pire qu'une absence de note.</p></div>
+  </div>
+  <p><strong>Démo de la grille :</strong> le formateur fait noter sa proposition sur les <strong>trois dimensions marquées ★</strong>, un juge par dimension. Puis il révèle une branche de démo déjà notée : la proposition, ses rendus et ses notes, prêts sans attendre.</p>
+  <p class="source">Les règles du juge viennent d'Anthropic, <em>Demystifying evals for AI agents</em> : « grade each dimension with an isolated LLM-as-judge », et lui permettre de « return 'Unknown' ». Pour savoir si une grille est bonne, on la calibre : elle doit mieux noter notre ancienne proposition gagnée que la perdue (<code>sources/propositions-passees/</code>).</p>
+
+  <h3>Et ensuite : le hill climbing</h3>
+  <p>Une fois qu'on a des yeux et une grille, on peut laisser l'agent <strong>grimper</strong> : il modifie la proposition, la fait noter, <strong>garde</strong> la version si la note monte et <strong>annule</strong> sinon, et recommence, avec un <strong>budget fixe</strong> (par exemple cinq essais). C'est l'idée de l'<em>autoresearch</em> d'Andrej Karpathy, transposée au contenu. Nous ne le pratiquons pas aujourd'hui.</p>
+  <div class="encart orange">
+    <p class="titre-encart">Le piège</p>
+    <p>À force de grimper, l'agent finit par <strong>optimiser la grille, pas la proposition</strong> : il apprend ce qui fait monter la note, pas ce qui fait signer la cliente. Le remède : un humain lit un <strong>échantillon</strong> des versions et des notes. On ne bloque pas chaque tour, on goûte régulièrement les plats.</p>
+  </div>
+
+  <h3>Un juge d'un autre fournisseur</h3>
+  <p>T3 Code pilote plusieurs fournisseurs : un juge d'un autre modèle (Codex, par exemple) peut noter ce que Claude a écrit, avec un autre regard et d'autres angles morts. Nous le citons seulement : il demande un autre abonnement, que l'atelier n'exige pas.</p>
 <!-- FIN EMPLACEMENT verification-commun -->
 
   <h3>Exercice 2 · des yeux et une grille</h3>
 
 <!-- EMPLACEMENT verification-proposition : parcours Proposition. Remplacer ce bloc par l'énoncé de l'exercice 2 Proposition. -->
-  <div class="emplacement" data-emplacement="verification-proposition">
-    <p><strong>À venir :</strong> l'énoncé de l'exercice 2, parcours Proposition.</p>
+  <div class="encart papier">
+    <p class="titre-encart">Parcours Proposition · 7 min</p>
+    <p><strong>L'objectif :</strong> compléter votre brief pour que votre agent <strong>voie</strong> sa proposition et la <strong>note</strong> : des yeux (les pages du PDF en images) et une grille (la grille Proposition).</p>
   </div>
+  <ol class="etapes">
+    <li><strong>Cliquez sur le prompt link de départ</strong> de l'exercice 2, complétez votre prénom, lisez, puis envoyez. L'agent prépare le rendu sur votre branche, sans toucher à votre proposition.
+      <p class="prompt-link" data-prompt-link="proposition-2"><span class="etiquette">Prompt link · exercice 2 Proposition</span><span class="a-venir">à venir</span></p>
+    </li>
+    <li><strong>Écrivez la suite de votre brief</strong>, dans ce thread. Elle dit trois choses, avec vos mots :
+      <ul>
+        <li><strong>les yeux</strong> : rendre la proposition en PDF, ouvrir les images des pages, corriger dans le Markdown ce que la cliente verrait de travers ;</li>
+        <li><strong>la grille</strong> : faire noter la proposition avec <code>proposition/grille-proposition.md</code>, sur les trois dimensions marquées ★, par un juge isolé par dimension, et ranger les notes dans <code>proposition/&lt;prénom&gt;/notes-grille.md</code> ;</li>
+        <li><strong>les limites</strong> : combien de tours au plus (deux suffisent), et ce que l'agent ne fait pas sans vous.</li>
+      </ul>
+      Pas de « vérifie ton travail » : vous lui donnez de quoi regarder et de quoi juger, c'est mieux.</li>
+    <li><strong>Envoyez, puis lisez les notes.</strong> Pour chaque dimension : êtes-vous d'accord avec la note ? La citation la justifie-t-elle ? C'est vous l'échantillonnage humain.</li>
+  </ol>
+  <p class="source">Si le temps presse, une seule dimension suffit : un juge, c'est un sous-agent de plus sur votre quota. Le PDF et les images restent dans votre dossier, hors de Git ; demandez à l'agent de vous ouvrir le PDF si vous voulez le voir.</p>
+  <details>
+    <summary>Le texte du prompt link de départ</summary>
+<pre class="prompt" id="prompt-proposition-2">J'en suis à l'exercice 2 du parcours Proposition de l'atelier. Mon prénom : [à compléter]. Ma proposition est dans proposition/prénom/proposition.md, sur ma branche prénom/proposition.
+
+Prépare le rendu : si les dépendances de proposition/ ne sont pas encore installées, installe-les comme l'explique proposition/CLAUDE.md.
+
+Ne rends rien encore et ne modifie pas ma proposition : la suite de mon brief arrive dans le message suivant. Réponds en une phrase quand c'est prêt.</pre>
+  </details>
 <!-- FIN EMPLACEMENT verification-proposition -->
 
 <!-- EMPLACEMENT verification-video : parcours Vidéo. Remplacer ce bloc par l'encart Vidéo et l'énoncé de l'exercice 2 Vidéo. -->
@@ -519,9 +695,27 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
   <p class="source">Les lettres A, B et C sont attribuées en début d'exercice.</p>
 
 <!-- EMPLACEMENT orchestrer-proposition : parcours Proposition. Remplacer ce bloc par l'énoncé de l'exercice 3 Proposition. -->
-  <div class="emplacement" data-emplacement="orchestrer-proposition">
-    <p><strong>À venir :</strong> l'énoncé de l'exercice 3, parcours Proposition.</p>
+  <h3>Exercice 3 · la PR « relis-moi »</h3>
+  <div class="encart papier">
+    <p class="titre-encart">Parcours Proposition · 4 min</p>
+    <p><strong>Le scénario :</strong> votre proposition part chez la Brûlerie Caravelle demain. C'est une porte à sens unique, alors vous demandez à un associé de la relire avant : votre agent ouvre votre <strong>PR « relis-moi »</strong>, et vous relisez celle de l'associé suivant.</p>
   </div>
+  <ol class="etapes">
+    <li><strong>Cliquez sur le prompt link de départ</strong> de l'exercice 3. Complétez votre prénom et la question que vous voulez poser à votre relecteur (par exemple : « le calendrier te paraît-il tenable ? »), lisez, puis envoyez. L'agent enregistre votre travail, pousse votre branche sur GitHub et ouvre la PR vers <code>main</code>. Il vous en donne le lien.
+      <p class="prompt-link" data-prompt-link="proposition-3"><span class="etiquette">Prompt link · exercice 3 Proposition</span><span class="a-venir">à venir</span></p>
+    </li>
+    <li><strong>Relisez la PR de l'associé suivant</strong>, dans l'ordre de la relecture en rond. Demandez son lien à votre agent (« donne-moi le lien de la PR « relis-moi » de Camille »), ouvrez-la, regardez la proposition et ses notes, et <strong>laissez un commentaire</strong> qui répond à sa question.</li>
+    <li><strong>Ne fusionnez pas.</strong> Relire et commenter suffit : la décision d'envoyer reste à l'auteur.</li>
+  </ol>
+  <p class="source">Le PDF n'est pas dans la PR : seule la source (<code>proposition.md</code>) et les notes y sont. Le PDF final circulera, comme aujourd'hui, par Drive ou Chat.</p>
+  <details>
+    <summary>Le texte du prompt link de départ</summary>
+<pre class="prompt" id="prompt-proposition-3">Ma proposition pour la Brûlerie Caravelle part chez la cliente demain, et je veux qu'un associé la relise avant. Mon prénom : [à compléter].
+
+1. Enregistre sur ma branche prénom/proposition le contenu de mon dossier proposition/prénom/ (la proposition et ses notes de grille, sans le dossier rendu/), puis pousse la branche sur GitHub.
+2. Ouvre une PR « relis-moi » vers main, intitulée « Relis-moi : proposition Brûlerie Caravelle (prénom) ». Dans sa description, dis en quelques lignes ce qui part et quand, résume les notes de la grille, et pose ma question au relecteur : [à compléter].
+3. Ne la fusionne pas. Donne-moi seulement son lien.</pre>
+  </details>
 <!-- FIN EMPLACEMENT orchestrer-proposition -->
 
 <!-- EMPLACEMENT orchestrer-video : parcours Vidéo. Remplacer ce bloc par l'énoncé de l'exercice 3 Vidéo. -->
@@ -561,9 +755,24 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
   <div class="entete-partie"><span class="numero">8</span><h2>Ouverture et clôture</h2><span class="minutes">2 min</span></div>
 
 <!-- EMPLACEMENT cloture-skill : parcours Proposition. Remplacer ce bloc par la présentation de la skill /proposition-klass, dernier barreau de l'escalade. -->
-  <div class="emplacement" data-emplacement="cloture-skill">
-    <p><strong>À venir :</strong> la skill <code>/proposition-klass</code>, le dernier barreau de l'escalade.</p>
+  <h3>Le dernier barreau de l'escalade : la skill <code>/proposition-klass</code></h3>
+  <p>Vous avez briefé, ajouté des yeux et une grille, puis rangé ce qui revenait dans CLAUDE.md. Imaginez maintenant que vous ayez recollé <strong>pour la troisième fois</strong> le même déroulé en plusieurs étapes : lire les sources, rédiger, rendre, regarder, noter. C'est seulement là qu'une skill se justifie.</p>
+  <figure class="schema">
+    <ol class="escalade" aria-label="L'escalade brief → contexte permanent → skill, avec la skill en dernier barreau">
+      <li><span class="quand">D'abord</span><strong>Un meilleur brief</strong><span>Pour cette tâche-ci</span></li>
+      <li><span class="quand">Correction faite deux fois</span><strong>Contexte permanent</strong><span>CLAUDE.md ou la mémoire</span></li>
+      <li class="actif"><span class="quand">Troisième playbook identique</span><strong>Une skill</strong><span>/proposition-klass</span></li>
+      <li class="au-dela"><span class="quand">Au-delà</span><strong>Script ou hook</strong><span>Ce qui doit arriver à coup sûr</span></li>
+    </ol>
+  </figure>
+  <p>La skill est la <strong>troisième case</strong> du schéma vu dans « L'environnement » : le dernier barreau de l'<strong>escalade brief → contexte permanent → skill</strong>. Elle est déjà prête dans le dossier, <code>.claude/skills/proposition-klass/SKILL.md</code> : un simple fichier texte, qui réunit ce que vous avez construit pendant la séance.</p>
+  <div class="cartes">
+    <div class="carte"><h4>Le déroulé</h4><p>Les étapes, dans l'ordre : lire la source de vérité, rédiger selon le plan qui a gagné, rendre et regarder, noter, rendre compte, s'arrêter avant toute porte à sens unique.</p></div>
+    <div class="carte"><h4>La grille</h4><p>Elle renvoie à <code>proposition/grille-proposition.md</code>, avec le brief type d'un juge isolé.</p></div>
+    <div class="carte"><h4>Le script de rendu</h4><p>Elle s'appuie sur <code>proposition/outils/rendre.mjs</code> : ce qui doit être identique à chaque fois est un script, pas une consigne.</p></div>
   </div>
+  <p>Pour la lancer, tapez <code>$</code> dans le composeur de T3 Code et choisissez <code>proposition-klass</code> (ou tapez <code>/proposition-klass</code> dans Claude Code), suivi de votre prénom et de ce qui change cette fois. Elle ne se lance pas toute seule quand vous rédigez votre propre brief.</p>
+  <p class="source">C'est la seule skill de l'atelier, et ce n'est pas un hasard : la documentation de Claude Code conseille de bâtir son environnement au fil du temps et de faire la tâche sans skill d'abord ; une skill sert à un workflow précis que l'agent ne connaît pas déjà.</p>
 <!-- FIN EMPLACEMENT cloture-skill -->
 
   <h3>Le récapitulatif</h3>
