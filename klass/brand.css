@@ -1,0 +1,18 @@
+/* Klass by Katalyx — variables de marque. Généré par _source/generate.py */
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap");
+
+:root {
+  --klass-ink: #0B0B0B;
+  --klass-paper: #F2F2F2;
+  --klass-white: #FFFFFF;
+  --klass-muted: #575757;
+  --klass-orange: #E85431;
+  --klass-orange-on-dark: #F06A49;
+  --klass-orange-strong: #B53A1C;
+  --klass-orange-light: #FDEBE4;
+  --klass-border: #DEDEDE;
+
+  --klass-font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --klass-font-text: "Schibsted Grotesk", system-ui, sans-serif;
+  --klass-font-mono: ui-monospace, "JetBrains Mono", "SFMono-Regular", Menlo, monospace;
+}

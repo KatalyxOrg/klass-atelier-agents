@@ -1,0 +1,13 @@
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Parcours Vidéo : les rendus restent hors de Git (ils circulent par Drive ou Chat)
+video/out/
+*.mp4
+*.mov
+*.webm
+planche-contact*.png
+
+# Rendus de la proposition (PDF et images) : ils circulent par Drive ou Chat, pas par Git
+proposition/**/rendu/

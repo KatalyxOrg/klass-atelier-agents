@@ -1,0 +1,21 @@
+{
+  "name": "klass-atelier-video",
+  "private": true,
+  "description": "Projet Remotion de départ du parcours Vidéo : une vidéo de 20 secondes, sans voix ni musique",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "navigateur": "remotion browser ensure",
+    "rendre": "node scripts/rendre.mjs",
+    "planche": "node scripts/planche-contact.mjs",
+    "studio": "remotion studio src/index.js"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.540",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.540"
+  }
+}
