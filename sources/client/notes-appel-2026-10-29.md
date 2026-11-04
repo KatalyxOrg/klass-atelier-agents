@@ -7,7 +7,7 @@
 ## Ce qui ne va pas aujourd'hui
 
 - Malik passe **environ 2 jours par mois** sur les abonnements : relances de paiement, étiquettes, changements d'adresse reçus par e-mail.
-- En 2025, **31 abonnés sur 170 ont arrêté** parce qu'ils ne pouvaient pas mettre en pause pendant leurs vacances (d'après les e-mails de résiliation). Il en reste 140.
+- L'abonnement comptait 170 abonnés début 2025. Dans l'année, **31 ont arrêté** parce qu'ils ne pouvaient pas mettre en pause pendant leurs vacances (d'après les e-mails de résiliation), et une poignée de nouveaux sont arrivés : on en compte **140** aujourd'hui.
 - Les commandes des bureaux arrivent par e-mail, souvent incomplètes. Deux livraisons ont été oubliées en septembre.
 
 ## Ce qu'ils veulent

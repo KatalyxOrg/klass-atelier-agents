@@ -24,7 +24,7 @@ Un espace réservé aux entreprises clientes, branché sur la boutique existante
 
 ## Vidéo de présentation (2 semaines)
 
-Une vidéo animée (texte, photos, logo), aux formats carré et vertical.
+Une vidéo animée (texte, photos, logo), livrée aux formats carré, vertical (réseaux sociaux) et horizontal (écrans).
 - **20 secondes** ou **45 secondes**.
 - **Compris :** un script, une première version, deux séries de retours.
 - **Pas compris :** le tournage, la voix off, la musique sous licence.
