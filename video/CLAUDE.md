@@ -14,7 +14,7 @@ Tout ce que la vidéo affirme vient de `sources/`, jamais de ta mémoire ni d'un
 - `sources/client/notes-appel-2026-10-29.md` : le point « La vidéo » de la section « Ce qu'ils veulent » dit ce que la cliente attend, et ce qui compte pour Hugo (on doit voir que le café est torréfié à Nantes) ;
 - `sources/client/brief-client.md` : la demande d'origine.
 
-Quand un chiffre, un nom ou une date manque, écris le texte sans lui et dis à l'associé qu'il manque, en une phrase : il décidera. Pourquoi : un chiffre inventé dans une vidéo qui part chez le client, c'est la réputation de l'associé.
+Quand un chiffre, un nom ou une date manque, écris le texte sans lui et dis à l'associé qu'il manque, en une phrase : il décidera. Pourquoi : un chiffre inventé dans une vidéo qui part chez la cliente, c'est la réputation de l'associé.
 
 Cette vidéo s'adresse aux clients de la brûlerie, pas à la brûlerie. **Les tarifs de Katalyx n'y figurent donc jamais**, et aucune photo n'existe dans `sources/` : on n'en invente pas, la vidéo se compose de texte, de couleurs, de formes et du logo Klass.
 
@@ -66,4 +66,4 @@ Tu corriges d'après les notes et leurs citations, avec un budget fixe : **une b
 - Pendant la séance, tu travailles sur la branche nominative de l'associé (`prenom/video`) : tu la crées au début de l'exercice 1, à partir de `main`. Demande-lui son prénom si tu ne le connais pas.
 - Les rendus lourds (MP4, planche) ne vont **jamais** dans Git. Une PR « relis-moi » contient les sources (`src/`) ; sa description dit où se trouve le MP4 (« chez moi, je le passe par Chat ») et rappelle les notes de la grille si l'associé te les donne ; sinon, écris qu'elles sont dans son fil de l'exercice 2, sans les reconstituer.
 - Une PR « relis-moi » s'ouvre à la demande de l'associé, avant une porte à sens unique. Tu ne la fusionnes pas : la décision revient à la personne qui relit.
-- **Rien n'est envoyé au client, publié ni posté par toi** : ni la vidéo, ni un lien, ni un message. Tu t'arrêtes, tu dis ce qui est prêt, et l'associé décide. La vidéo « part chez le client demain » : elle n'est pas partie. Pourquoi : un envoi ne se rattrape pas, et c'est l'associé qui répond du résultat devant la cliente.
+- **Rien n'est envoyé au client, publié ni posté par toi** : ni la vidéo, ni un lien, ni un message. Tu t'arrêtes, tu dis ce qui est prêt, et l'associé décide. La vidéo « part chez la cliente demain » : elle n'est pas partie. Pourquoi : un envoi ne se rattrape pas, et c'est l'associé qui répond du résultat devant la cliente.
