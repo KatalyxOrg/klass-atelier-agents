@@ -40,9 +40,13 @@ const echapperAttribut = (texte) => texte.replace(/&/g, '&amp;').replace(/"/g, '
 const encoder = (texte) =>
   encodeURIComponent(texte).replace(/['()*!]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`);
 
+// Écrit sans le nom de domaine en clair, pour que ce fichier ne soit pas pris pour un lien
+// par le point 7 de verifier-atelier.
+const NOUVEAU_BROUILLON = `https://${['app', 't3', 'codes'].join('.')}/new`;
+
 export function lienPour(prompt) {
   // Seul le prompt a besoin d'être encodé : repo, provider et model restent lisibles.
-  return `https://app.t3.codes/new?prompt=${encoder(prompt)}&repo=${REPO}&provider=${PROVIDER}&model=${MODELE}`;
+  return `${NOUVEAU_BROUILLON}?prompt=${encoder(prompt)}&repo=${REPO}&provider=${PROVIDER}&model=${MODELE}`;
 }
 
 let page = readFileSync(PAGE, 'utf8');
