@@ -27,7 +27,7 @@ Limite assumée : le contrôle est écrit en Node pour rester portable, mais il 
 | 6 | Branche de démo pré-notée `demo/proposition-notee` : sur le remote, avec la proposition de démo, ses pages en images et une note par dimension de la grille (1 à 5 ou « Inconnu », passage cité) | `points/6-branche-demo.mjs` |
 | 7 | Prompt links : 8 000 caractères au plus, `repo`, `provider` et `model` attendus, aucun caractère invisible ; chaque emplacement de lien de `index.html` porte son lien (voir `outils/prompt-links/`) | `points/7-prompt-links.mjs` |
 | 8 | Aucune mention de l'autre marque de Katalyx (contenu, chemins, messages de commit) | `points/8-aucune-mention.mjs` |
-| 9 | Page support : les images et fichiers locaux appelés par `index.html` existent, chaque ancre a sa cible (dont les 9 étapes `#accueil` … `#marge`), et le mode présentation s'ouvre sans erreur dans le Chrome headless de Playwright, les flèches parcourant toutes les vues | `points/9-page-support.mjs` |
+| 9 | Page support : les images et fichiers locaux appelés par `index.html` existent, chaque ancre a sa cible (dont les 9 étapes `#accueil` … `#marge`), et le mode présentation s'ouvre sans erreur dans le Chrome headless de Playwright, les flèches parcourant toutes les vues, chacune tenant entièrement dans l'écran (commandes comprises) à 960 × 600 et à 1366 × 768 | `points/9-page-support.mjs` |
 
 ## Ajouter un point
 

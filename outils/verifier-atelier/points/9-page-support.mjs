@@ -3,7 +3,10 @@
 //     (et les illustrations ne viennent pas de la branche de démo : elles sont suivies ici) ;
 //   - chaque ancre interne (#…) mène à un élément de la page, dont les 9 étapes du script formateur ;
 //   - dans le Chrome headless de Playwright, la page s'ouvre en mode présentation sans erreur,
-//     chaque image se charge, et les flèches parcourent toutes les vues des 9 étapes.
+//     chaque image se charge, et les flèches parcourent toutes les vues des 9 étapes ;
+//   - chaque vue de présentation tient dans l'écran, commandes comprises, à 960 × 600
+//     (1440 × 900 zoomé à 150 %, comme le demande le script formateur) et à 1366 × 768,
+//     pour chaque choix de parcours : rien ne sort du cadre, rien ne passe sous les commandes.
 
 import { createRequire } from 'node:module';
 import { join } from 'node:path';
@@ -11,6 +14,28 @@ import { pathToFileURL } from 'node:url';
 import { Ecart, fichiersSuivis, lireTexte } from '../outils.mjs';
 
 const PAGE = 'index.html';
+const CADRES = [{ width: 960, height: 600 }, { width: 1366, height: 768 }];
+const PARCOURS = ['tous', 'proposition', 'video'];
+
+/** Dans la page ouverte en présentation : ce qui, dans la vue courante, sort du cadre ou passe sous les commandes. */
+function debordements() {
+  const H = innerHeight;
+  const W = innerWidth;
+  const commandes = document.querySelector('.commandes-diapo')?.getBoundingClientRect();
+  const vue = document.querySelector('section.active > .bloc.courant');
+  const ecarts = [];
+  if (document.documentElement.scrollHeight > H + 1) ecarts.push(`la page défile (${document.documentElement.scrollHeight} px de haut pour ${H})`);
+  if (!vue) return ecarts;
+  for (const e of vue.querySelectorAll('h1, h3, li, p, img, table, td, figure > svg, .carte, .encart, .promesse, .surtitre')) {
+    const r = e.getBoundingClientRect();
+    if (!r.width || !r.height) continue;
+    const texte = (e.textContent || e.getAttribute('alt') || e.tagName).trim().replace(/\s+/g, ' ').slice(0, 50);
+    if (r.bottom > H + 0.5 || r.right > W + 0.5 || r.left < -0.5) ecarts.push(`« ${texte} » sort du cadre`);
+    else if (commandes && r.left < commandes.right && r.right > commandes.left && r.top < commandes.bottom && r.bottom > commandes.top) ecarts.push(`« ${texte} » passe sous les commandes`);
+  }
+  return [...new Set(ecarts)];
+}
+
 const ETAPES = ['accueil', 'pourquoi', 'briefer', 'environnement', 'verification', 'orchestrer', 'mobile', 'cloture', 'marge'];
 
 /** Les ressources locales appelées par la page : src et href qui ne sont ni des liens web ni des ancres. */
@@ -106,8 +131,30 @@ export default {
         if (active !== id) throw new Ecart(`L'ancre #${id} n'affiche pas son étape (affiche #${active}).`);
       }
       if (erreurs.length) throw new Ecart(`La page s'ouvre avec des erreurs :\n${erreurs.join('\n')}`);
+      await contexte.close();
+
+      // Chaque vue tient dans le cadre, à chaque taille d'écran et pour chaque parcours.
+      const fautes = [];
+      for (const cadre of CADRES) {
+        const ctx = await navigateur.newContext({ viewport: cadre });
+        for (const parcours of PARCOURS) {
+          const o = await ctx.newPage();
+          await o.goto(url.replace('parcours=tous', `parcours=${parcours}`), { waitUntil: 'load' });
+          await o.evaluate(() => document.fonts.ready);
+          for (let i = 0; i < 200; i++) {
+            const compteur = await o.evaluate(() => document.querySelector('.commandes-diapo .compteur')?.textContent);
+            for (const ecart of await o.evaluate(debordements)) fautes.push(`${cadre.width} × ${cadre.height}, parcours ${parcours}, ${compteur} : ${ecart}`);
+            await o.keyboard.press('ArrowRight');
+            if (await o.evaluate(() => document.querySelector('.commandes-diapo .compteur')?.textContent) === compteur) break;
+          }
+          await o.close();
+        }
+        await ctx.close();
+      }
+      if (fautes.length) throw new Ecart(`Des vues de présentation débordent (${fautes.length}) :\n${fautes.slice(0, 15).join('\n')}`);
+
       const total = [...vues.values()].reduce((a, b) => a + b, 0);
-      return `${images.length} image(s) et ${ressources.length - images.length} autre(s) fichier(s) présents ; ${ids.size} ancres ; présentation : ${total} vues sur ${vues.size} parties, sans erreur.`;
+      return `${images.length} image(s) et ${ressources.length - images.length} autre(s) fichier(s) présents ; ${ids.size} ancres ; présentation : ${total} vues sur ${vues.size} parties, sans erreur ; chaque vue tient à 960 × 600 et 1366 × 768, pour les 3 choix de parcours.`;
     } finally {
       await navigateur.close();
     }

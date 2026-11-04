@@ -183,33 +183,51 @@ footer.pied img{height:28px;display:block;margin-bottom:10px}
 .presentation .si-clair{display:none}
 .presentation .si-sombre,.presentation .couverture .lockup.si-sombre{display:block}
 .presentation .couverture .lockup.si-clair{display:none}
-.presentation main{max-width:1320px;padding-bottom:96px}
-.presentation section.etape,.presentation section.annexe{padding-top:28px}
-.presentation .entete-etape{margin-bottom:0}
+/* Un cadre fixe : la barre en haut, une bande réservée aux commandes en bas, et chaque vue
+   tient entre les deux (vérifié à 960 × 600 et 1366 × 768 par verifier-atelier, point 9).
+   Les tailles suivent la plus petite des deux dimensions de l'écran. */
+.presentation body{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.presentation .barre-haut{padding-top:6px;padding-bottom:6px}
+.presentation .frise ol{padding-top:4px;padding-bottom:6px}
+.presentation main{flex:1;display:flex;flex-direction:column;width:100%;max-width:1320px;padding-bottom:var(--bande-commandes)}
+.presentation{--bande-commandes:calc(46px + 2 * clamp(10px,1.6vh,20px))}
+.presentation section.etape.active,.presentation section.annexe.active{flex:1;display:flex;flex-direction:column;padding-top:clamp(10px,2.4vh,28px)}
+.presentation .entete-etape{display:none}
+.presentation section.annexe>.entete-etape{display:flex;margin-bottom:0}
 .presentation .entete-etape .numero{background:var(--klass-orange-on-dark);color:var(--klass-ink);min-width:32px;height:32px;font-size:15px;border-radius:8px}
 .presentation .entete-etape h2{font-size:20px;color:var(--klass-orange-on-dark);letter-spacing:0}
 .presentation .chapeau,.presentation .suite,.presentation footer.pied{display:none}
-.presentation .bloc{display:none;border:0;margin:0;padding:28px 0 0}
-.presentation .bloc.courant{display:grid;grid-template-columns:minmax(0,1fr);align-content:start;gap:0 56px;min-height:calc(100vh - 210px)}
-.presentation .bloc.courant:has(>figure){grid-template-columns:minmax(0,5fr) minmax(0,8fr)}
+.presentation .bloc{display:none;border:0;margin:0;padding:clamp(6px,1.6vh,20px) 0 0}
+.presentation .bloc.courant{flex:1;display:grid;grid-template-columns:minmax(0,1fr);align-content:start;gap:0 clamp(28px,3.5vw,56px)}
+.presentation .bloc.courant:has(>figure){grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-content:center}
 .presentation .bloc>*:not(h3):not(figure):not(.cles):not(.pres):not(.couverture){display:none!important}
-.presentation .bloc>h3{grid-column:1;font-size:clamp(28px,3.2vw,46px);margin-bottom:28px;color:var(--klass-white)}
+.presentation .bloc>h3{grid-column:1;font-size:clamp(24px,min(3.2vw,5.4vh),46px);margin-bottom:clamp(12px,3vh,28px);color:var(--klass-white)}
 .presentation .bloc>.cles,.presentation .bloc>.pres{grid-column:1}
-.presentation .bloc>figure{grid-column:2;grid-row:1 / span 6;align-self:center;margin:0}
+.presentation .bloc>figure{grid-column:2;grid-row:1 / span 6;align-self:center;margin:0;min-height:0}
 .presentation .bloc:not(:has(>figure))>*{grid-column:1}
 .presentation .etape:has(>.bloc-couverture.courant)>.entete-etape{display:none}
 .bloc-couverture{border:0;margin-top:0;padding-top:8px}
-.presentation ul.cles{gap:18px}
-.presentation ul.cles li{font-size:clamp(19px,1.75vw,26px);color:#ffffffe6;padding-left:36px}
+.presentation ul.cles{gap:clamp(8px,2vh,18px);margin-bottom:clamp(10px,2.4vh,20px)}
+.presentation ul.cles li{font-size:clamp(16px,min(1.75vw,3.1vh),26px);color:#ffffffe6;padding-left:36px;max-width:none}
 .presentation ul.cles li::before{background:var(--klass-orange-on-dark);width:20px}
 .presentation ul.cles strong{color:var(--klass-white)}
 .presentation code{background:#ffffff1f;color:var(--klass-white)}
-.presentation figure.schema svg{max-height:calc(100vh - 260px)}
+.presentation figure.schema svg{max-height:calc(100dvh - 150px - var(--bande-commandes))}
 .presentation figure figcaption{display:none}
 .presentation .rendus img{box-shadow:none}
-.presentation .rendus.pages img{width:min(32%,340px)}
+.presentation figure.rendu{display:flex;flex-direction:column;gap:12px;align-items:center}
+.presentation .rendus{overflow:visible;padding:0;justify-content:center;--haut-rendu:calc(100dvh - 160px - var(--bande-commandes))}
+.presentation figure.rendu:has(>.rendus:not(.hors-parcours)+.rendus:not(.hors-parcours)) .rendus{--haut-rendu:calc((100dvh - 172px - var(--bande-commandes)) / 2)}
+.presentation .rendus img,.presentation .rendus.pages img,.presentation .rendus.planche img{width:auto;min-width:0;max-width:100%;height:var(--haut-rendu);object-fit:contain}
+.presentation .rendus.pages img{max-width:calc((100% - 28px) / 3)}
 .presentation .bloc>h3 code{font-size:.62em}
-.presentation .tableau.pres{max-height:calc(100vh - 360px);overflow:auto}
+.presentation .tableau.pres{overflow:visible}
+/* Un glossaire (.tableau.glossaire) : la présentation n'en garde que les termes, en pastilles ;
+   les définitions restent en lecture. */
+.presentation .tableau.glossaire thead,.presentation .tableau.glossaire td+td{display:none}
+.presentation .tableau.glossaire tbody{display:flex;flex-wrap:wrap;gap:clamp(8px,1.6vh,14px)}
+.presentation .tableau.glossaire tr{display:block}
+.presentation .tableau.glossaire td{display:block;border:1px solid #333;background:#1A1A1A;border-radius:999px;padding:clamp(6px,1.4vh,12px) 18px;font:700 clamp(16px,min(1.6vw,3vh),24px)/1.25 var(--klass-font-display)}
 .presentation table{color:var(--klass-white)}
 .presentation th{background:#1F1F1F}
 .presentation th,.presentation td{border-bottom-color:#333}
@@ -220,14 +238,14 @@ footer.pied img{height:28px;display:block;margin-bottom:10px}
 .presentation .carte .barreau{background:#ffffff1f}
 .presentation .titre-encart,.presentation .carte .lettre,.presentation .carte h4 .picto{color:var(--klass-orange-on-dark)}
 .presentation .pres.cartes{margin-top:8px}
-.presentation .couverture{grid-column:1 / -1;padding-top:6vh}
-.presentation .couverture .lockup{height:64px}
-.presentation .couverture h1{font-size:clamp(40px,6vw,80px);color:var(--klass-white)}
+.presentation .couverture{grid-column:1 / -1;padding-top:2vh}
+.presentation .couverture .lockup{height:clamp(44px,8vh,64px);margin-bottom:clamp(16px,4.5vh,36px)}
+.presentation .couverture h1{font-size:clamp(36px,min(6vw,9.5vh),80px);color:var(--klass-white)}
 .presentation .couverture .surtitre{color:var(--klass-orange-on-dark)}
-.presentation .promesse{background:#1A1A1A;font-size:clamp(22px,2.4vw,32px)}
+.presentation .promesse{background:#1A1A1A;font-size:clamp(19px,min(2.4vw,4vh),32px);margin-top:clamp(14px,3.5vh,26px)}
 .presentation .couverture>*:not(.lockup):not(.surtitre):not(h1):not(.promesse){display:none}
-.presentation .commandes-diapo{display:flex;position:fixed;right:clamp(12px,2vw,28px);bottom:clamp(12px,2vw,24px);z-index:30;align-items:center;gap:8px;background:#1A1A1A;border:1px solid #333;border-radius:999px;padding:6px;font-size:14px;color:#ffffffb8}
-.commandes-diapo button{font:700 18px/1 var(--klass-font-display);width:38px;height:38px;border-radius:50%;border:0;cursor:pointer;background:#ffffff14;color:var(--klass-white)}
+.presentation .commandes-diapo{display:flex;position:fixed;right:clamp(12px,2vw,28px);bottom:clamp(10px,1.6vh,20px);z-index:30;align-items:center;gap:8px;background:#1A1A1A;border:1px solid #333;border-radius:999px;padding:6px;font-size:14px;color:#ffffffb8}
+.commandes-diapo button{font:700 18px/1 var(--klass-font-display);width:32px;height:32px;border-radius:50%;border:0;cursor:pointer;background:#ffffff14;color:var(--klass-white)}
 .commandes-diapo button:hover{background:var(--klass-orange-on-dark);color:var(--klass-ink)}
 .commandes-diapo .compteur{padding:0 8px;font-variant-numeric:tabular-nums;white-space:nowrap}
 
@@ -268,8 +286,10 @@ footer.pied img{height:28px;display:block;margin-bottom:10px}
   .rendus.pages img{min-width:140px}
 }
 @media (max-width:560px){
-  .choix-parcours .libelle{display:none}
-  .choix-parcours button{padding:7px 10px}
+  /* Un bouton qui a son picto le garde seul ; son libellé reste lu par les lecteurs d'écran.
+     Sans picto, le libellé reste affiché : jamais de pastille vide. */
+  .choix-parcours button:has(.picto) .libelle{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .choix-parcours button:has(.picto){padding:7px 10px}
 }
 @media print{
   .barre,.suite,.commandes-diapo{display:none}
