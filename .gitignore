@@ -1,3 +1,10 @@
 node_modules/
 .DS_Store
 Thumbs.db
+
+# Parcours Vidéo : les rendus restent hors de Git (ils circulent par Drive ou Chat)
+video/out/
+*.mp4
+*.mov
+*.webm
+planche-contact*.png
