@@ -178,7 +178,6 @@ footer.pied img{height:28px;display:block;margin-bottom:10px}
   --s-accent:#F06A49; --s-accent-texte:#F06A49; --s-accent-clair:#3A1E16;
   --s-plein:#F2F2F2; --s-sur-plein:#0B0B0B; --s-sur-accent:#0B0B0B;
   --s-plein-doux:#D6D6D6; --s-etiquette-plein:#B53A1C;
-  scroll-padding-top:0;
 }
 .presentation body{background:var(--klass-ink);color:var(--klass-white)}
 .presentation .si-clair{display:none}
@@ -194,7 +193,7 @@ footer.pied img{height:28px;display:block;margin-bottom:10px}
 .presentation .bloc.courant{display:grid;grid-template-columns:minmax(0,1fr);align-content:start;gap:0 56px;min-height:calc(100vh - 210px)}
 .presentation .bloc.courant:has(>figure){grid-template-columns:minmax(0,5fr) minmax(0,8fr)}
 .presentation .bloc>*:not(h3):not(figure):not(.cles):not(.pres):not(.couverture){display:none!important}
-.presentation .bloc>h3{grid-column:1;font-size:clamp(30px,3.6vw,52px);margin-bottom:28px;color:var(--klass-white)}
+.presentation .bloc>h3{grid-column:1;font-size:clamp(28px,3.2vw,46px);margin-bottom:28px;color:var(--klass-white)}
 .presentation .bloc>.cles,.presentation .bloc>.pres{grid-column:1}
 .presentation .bloc>figure{grid-column:2;grid-row:1 / span 6;align-self:center;margin:0}
 .presentation .bloc:not(:has(>figure))>*{grid-column:1}
@@ -208,7 +207,13 @@ footer.pied img{height:28px;display:block;margin-bottom:10px}
 .presentation figure.schema svg{max-height:calc(100vh - 260px)}
 .presentation figure figcaption{display:none}
 .presentation .rendus img{box-shadow:none}
-.presentation .rendus.pages img{width:min(31%,280px)}
+.presentation .rendus.pages img{width:min(32%,340px)}
+.presentation .bloc>h3 code{font-size:.62em}
+.presentation .tableau.pres{max-height:calc(100vh - 360px);overflow:auto}
+.presentation table{color:var(--klass-white)}
+.presentation th{background:#1F1F1F}
+.presentation th,.presentation td{border-bottom-color:#333}
+.presentation .encart.sombre{border:1px solid #333}
 .presentation .carte,.presentation .encart{background:#1A1A1A;border-color:#333;color:var(--klass-white)}
 .presentation .encart.orange{background:#3A1E16;border-color:#5a2c1f}
 .presentation .carte p,.presentation .source{color:#ffffffb8}
@@ -254,13 +259,12 @@ footer.pied img{height:28px;display:block;margin-bottom:10px}
   figure.schema{overflow-x:auto;margin-left:-16px;margin-right:-16px;padding:0 16px 6px}
   figure.schema svg{min-width:600px}
   figure.schema::before{content:"Faites glisser le schéma →";display:block;font-size:13px;font-weight:600;color:var(--klass-muted);margin-bottom:6px;position:sticky;left:0}
-  .presentation figure.schema::before{display:none}
-  .presentation figure.schema{margin:12px 0 0;padding:0}
+  .presentation figure.schema{margin-top:12px}
+  .presentation figure.schema::before{color:#ffffffb8}
   .encart,.parcours{padding:14px 14px}
   .parcours .tableau{margin-left:-6px;margin-right:-6px}
   th,td{padding:7px 8px;font-size:14px}
   ol.etapes>li{padding-left:40px}
-  .presentation figure.schema svg{min-width:0}
   .rendus.pages img{min-width:140px}
 }
 @media (max-width:560px){

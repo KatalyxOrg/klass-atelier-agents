@@ -224,6 +224,11 @@
   const depart = sectionDepuisAncre();
   const diapo = Math.max(0, (Number(parametres.get('diapo')) || 1) - 1);
   afficher(depart.section, { vue: diapo, cible: depart.cible, defiler: Boolean(depart.cible) });
+  // Le navigateur saute aussi vers l'ancre, après ce script : une étape entière s'affiche depuis son haut.
+  if (!depart.cible || depart.cible === depart.section) {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.addEventListener('load', () => window.scrollTo(0, 0), { once: true });
+  }
 
   window.addEventListener('hashchange', () => {
     const { section, cible } = sectionDepuisAncre();
