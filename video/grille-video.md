@@ -61,7 +61,7 @@ Une note sans case citée n'est pas recevable. La planche ne montre que des imag
 
 ## 4. Message
 
-*La vidéo dit-elle ce que la cliente veut qu'elle dise ?* Pièces : la planche, la section « La vidéo » de `sources/client/notes-appel-2026-10-29.md` et `sources/client/fiche-client.md`.
+*La vidéo dit-elle ce que la cliente veut qu'elle dise ?* Pièces : la planche, le point « La vidéo » de la section « Ce qu'ils veulent » dans `sources/client/notes-appel-2026-10-29.md` et `sources/client/fiche-client.md`.
 
 | Note | Ancre |
 |---|---|

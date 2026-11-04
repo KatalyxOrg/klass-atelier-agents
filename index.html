@@ -368,7 +368,7 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
     <li><strong>Cliquez sur le prompt link de départ.</strong> Il ouvre un brouillon pour le parcours Vidéo (le dossier <code>video/</code>), en Sonnet 5.5. L'agent y crée d'abord votre branche <code>prenom/video</code> (votre <strong>brouillon parallèle</strong>), puis attend votre brief. Le brief n'y est pas : c'est l'exercice.
       <p class="prompt-link" data-prompt-link="exercice-1-video"><span class="etiquette">Prompt link · exercice 1 · parcours Vidéo</span><span class="a-venir">à venir</span></p>
     </li>
-    <li><strong>Écrivez votre brief à la suite, à la main</strong>, avec le gabarit en 7 rubriques : l'objectif et le pourquoi ; pour qui ; les sources à lire ; le livrable (format et longueur) ; le périmètre et ce qu'il ne faut pas faire ; les critères de succès ; quand s'arrêter ou demander. Pour les critères de succès, écrivez-les en mots simples : la grille arrive à l'exercice 2.</li>
+    <li><strong>Écrivez votre brief à la suite, à la main</strong>, avec le gabarit en 7 rubriques (pour le livrable : la vidéo rendue en MP4) : l'objectif et le pourquoi ; pour qui ; les sources à lire ; le livrable (format et longueur) ; le périmètre et ce qu'il ne faut pas faire ; les critères de succès ; quand s'arrêter ou demander. Pour les critères de succès, écrivez-les en mots simples : la grille arrive à l'exercice 2.</li>
     <li><strong>Passez le test du collègue.</strong> Un collègue qui ne connaît ni la cliente ni le projet comprendrait-il votre brief ? Fixez aussi le périmètre : ce que l'agent peut modifier, et ce qu'il ne touche pas.</li>
     <li><strong>Envoyez, puis laissez l'agent travailler.</strong> Il lit les sources, écrit le contenu de la vidéo et la rend. Vous n'avez aucune commande à taper.</li>
     <li><strong>Regardez la vidéo.</strong> Quand l'agent a fini, demandez-lui d'ouvrir <code>video/out/video.mp4</code>. Pour l'instant, c'est vous qui regardez à sa place : vous êtes son <strong>meat proxy</strong>. L'exercice 2 lui donne ses propres yeux.</li>
@@ -505,7 +505,7 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
       </tbody>
     </table>
     </div>
-    <p>Chaque dimension est notée par un <strong>juge séparé</strong> : un sous-agent au contexte neuf, qui ne reçoit que la planche et ses ancres. Il peut répondre <strong>« Inconnu »</strong> et il cite les cases qui justifient sa note. La planche ne montre que des images fixes : tout ce qui dépend du mouvement reste « Inconnu ». Le piège du <strong>hill climbing</strong> vaut ici aussi : à force de corriger pour la grille, on finit par soigner la grille plutôt que la vidéo. D'où un humain qui regarde la vraie vidéo avant qu'elle parte.</p>
+    <p>Chaque dimension est notée par un <strong>juge séparé</strong> : un sous-agent au contexte neuf, qui ne reçoit que la planche, les ancres de sa dimension et les pièces que la grille lui assigne (la liste des scènes pour le rythme, les sources pour le message). Il peut répondre <strong>« Inconnu »</strong> et il cite les cases qui justifient sa note. La planche ne montre que des images fixes : tout ce qui dépend du mouvement reste « Inconnu ». Le piège du <strong>hill climbing</strong> vaut ici aussi : à force de corriger pour la grille, on finit par soigner la grille plutôt que la vidéo. D'où un humain qui regarde la vraie vidéo avant qu'elle parte.</p>
   </div>
 
   <div class="encart orange" data-parcours="video">
@@ -513,10 +513,10 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
     <p><strong>Votre mission :</strong> donner à votre agent <strong>des yeux et une grille</strong>, puis le laisser corriger sa vidéo une fois.</p>
   </div>
   <ol class="etapes">
-    <li><strong>Cliquez sur le prompt link de départ.</strong> Il vous remet sur votre branche <code>prenom/video</code>, dans le dossier <code>video/</code>, en Sonnet 5.5, et vous laisse écrire la suite : le brief de la correction n'y est pas.
+    <li><strong>Cliquez sur le prompt link de départ.</strong> Il vous remet sur votre branche <code>prenom/video</code>, dans le dossier <code>video/</code>, en Sonnet 5.5, et vous laisse écrire la suite : le brief de la correction n'y est pas. Ce brouillon est un <strong>nouveau fil</strong> : l'agent n'y a pas lu votre brief de l'exercice 1.
       <p class="prompt-link" data-prompt-link="exercice-2-video"><span class="etiquette">Prompt link · exercice 2 · parcours Vidéo</span><span class="a-venir">à venir</span></p>
     </li>
-    <li><strong>Complétez votre brief avec trois choses.</strong>
+    <li><strong>Rappelez l'essentiel, puis complétez votre brief avec trois choses.</strong> Dites en deux lignes que la vidéo de l'exercice 1 existe déjà sur votre branche et qu'il s'agit de la <em>corriger</em>, pas de la refaire. Puis ajoutez :
       <ul>
         <li><strong>Les yeux :</strong> le rendu Remotion et la planche contact. Le CLAUDE.md de <code>video/</code> explique à l'agent comment les fabriquer : dites-lui seulement de s'en servir.</li>
         <li><strong>La grille :</strong> les critères de succès deviennent ceux de <code>video/grille-video.md</code>. Visez 5.</li>
@@ -595,7 +595,7 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
       <p class="prompt-link" data-prompt-link="exercice-3-video"><span class="etiquette">Prompt link · exercice 3 · parcours Vidéo</span><span class="a-venir">à venir</span></p>
     </li>
     <li><strong>Demandez l'ouverture de la PR.</strong> Dans votre demande, dites ce qui part demain, ce que la personne qui relit doit regarder, et que le MP4 ne va pas dans Git : il circule par Chat ou Drive, la PR dit seulement où le trouver. Précisez aussi que personne ne fusionne.</li>
-    <li><strong>Relisez la PR de l'associé suivant</strong> (A relit B, B relit C, C relit A). Sur GitHub, lisez sa description puis les fichiers modifiés, surtout <code>video/src/contenu.js</code> : retrouvez-vous chaque chiffre et chaque nom dans <code>sources/</code> ? Si vous voulez voir la vidéo, demandez le MP4 à son auteur.</li>
+    <li><strong>Relisez la PR de l'associé suivant</strong> (A relit B, B relit C, C relit A). Sur GitHub, lisez sa description puis les fichiers modifiés, surtout <code>video/src/contenu.js</code> : retrouvez-vous chaque chiffre et chaque nom dans <code>sources/</code> ? Si vous voulez voir la vidéo, demandez le MP4 à son auteur. Si cet associé est sur le parcours Proposition, lisez à la place le fichier de sa proposition.</li>
     <li><strong>Commentez, sans fusionner.</strong> Laissez deux commentaires : une chose qui marche, et une question ou un point à changer.</li>
   </ol>
   <p><strong>Vous avez réussi si</strong> votre PR est ouverte avec une description claire, si l'onglet des fichiers modifiés ne contient ni MP4 ni planche contact, et si vous avez commenté la PR d'un autre sans la fusionner.</p>

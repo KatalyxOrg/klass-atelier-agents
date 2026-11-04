@@ -11,7 +11,7 @@ Une vidéo de **20 secondes** qui présente la Brûlerie Caravelle (le client fi
 Tout ce que la vidéo affirme vient de `sources/`, jamais de ta mémoire ni d'une valeur plausible. Pour cette vidéo, on lit surtout :
 
 - `sources/client/fiche-client.md` : qui est la Brûlerie Caravelle, ses chiffres, son ton, ses produits ;
-- `sources/client/notes-appel-2026-10-29.md` : la section « La vidéo » dit ce que la cliente veut, et ce qui compte pour Hugo (on doit voir que le café est torréfié à Nantes) ;
+- `sources/client/notes-appel-2026-10-29.md` : le point « La vidéo » de la section « Ce qu'ils veulent » dit ce que la cliente attend, et ce qui compte pour Hugo (on doit voir que le café est torréfié à Nantes) ;
 - `sources/client/brief-client.md` : la demande d'origine.
 
 Quand un chiffre, un nom ou une date manque, écris le texte sans lui et dis à l'associé qu'il manque, en une phrase : il décidera. Pourquoi : un chiffre inventé dans une vidéo qui part chez le client, c'est la réputation de l'associé.
@@ -26,7 +26,7 @@ Le projet Remotion est prêt : dépendances déclarées, kit Klass branché, com
 |---|---|
 | `src/contenu.js` | Le contenu : les scènes, leur durée, leurs textes, le format de l'image. **On commence par là.** |
 | `src/Presentation.jsx` | La mise en page : couleurs, polices, animations, logo. On le modifie quand le brief demande autre chose que du texte provisoire. |
-| `src/Racine.jsx` | La déclaration de la composition `Presentation` (20 s, 30 images par seconde). On n'y touche pas, sauf pour changer le format. |
+| `src/Racine.jsx` | La déclaration de la composition `Presentation` (20 s, 30 images par seconde). On n'y touche pas : le format se change dans `src/contenu.js`. |
 | `scripts/` | Les scripts de rendu et de planche contact. On n'y touche pas. |
 
 - Le format de départ est **vertical, 1080 × 1920** (Instagram). Les formats carré et horizontal existent dans l'offre de Katalyx : on ne les produit que si le brief les demande, en changeant `FORMAT` dans `src/contenu.js`.
@@ -49,7 +49,7 @@ Ces deux commandes n'écrivent rien dans les fichiers suivis par Git (les dossie
 
 - `npm run rendre` rend la composition en `out/video.mp4`. Le rendu complet dure environ une minute ; le premier est plus long. Regroupe tes modifications pour ne pas rendre à chaque détail.
 - `npm run planche` fabrique `out/planche-contact.png`, **la planche contact** : une seule image de 10 vignettes, une toutes les 2 secondes, lues de gauche à droite puis de haut en bas. La case 1 est à 1 s, la case 2 à 3 s, la case 3 à 5 s… la case 10 à 19 s.
-- Quand tu rends la vidéo, génère aussi la planche et ouvre l'image : c'est ainsi que tu vois ton travail, comme un monteur qui lit sa planche. Décris ce que tu y vois (texte coupé, texte illisible, logo mal placé, scène vide, deux scènes identiques à la suite) et corrige à partir de ces observations.
+- Quand le brief te demande de voir ta vidéo, génère la planche après le rendu et ouvre l'image : c'est ainsi que tu vois ton travail, comme un monteur qui lit sa planche. Lis les cases une à une, décris ce que tu y vois (texte coupé, texte illisible, logo mal placé, scène vide, deux scènes identiques à la suite) et corrige à partir de ces observations. Sans cette demande, rends la vidéo et dis à l'associé qu'elle est prête : c'est lui qui la regarde.
 - Ne lance pas `npm run studio` : il ouvre une interface interactive dont l'associé n'a pas besoin ici.
 - Le MP4 et la planche restent dans `out/`, **hors de Git** : les rendus finaux circulent par Drive ou Chat. Pour montrer la vidéo à l'associé, ouvre le fichier `out/video.mp4` avec le lecteur de l'ordinateur.
 
@@ -57,7 +57,7 @@ Ces deux commandes n'écrivent rien dans les fichiers suivis par Git (les dossie
 
 `grille-video.md` donne les critères de la vidéo : quatre dimensions (lisibilité, charte, rythme, message), chacune notée 1, 3 ou 5 avec une ancre qui dit à quoi ressemble chaque note. Quand le brief la mentionne, **vise les ancres 5 dès la composition**.
 
-Pour la noter, on ne s'en remet pas à la même tête qui a fabriqué la vidéo : chaque dimension que le brief demande est notée par **un juge séparé**, c'est-à-dire un sous-agent au contexte neuf à qui tu donnes uniquement la planche contact, la dimension à noter et ses ancres (pour le rythme, aussi la liste des scènes de `src/contenu.js`). Il répond par une note ou par « Inconnu », et cite les cases de la planche qui justifient sa réponse. Tu lui donnes ces éléments, jamais ton raisonnement. Tu ne lances pas d'autre sous-agent : l'associé a un quota limité.
+Pour la noter, on ne s'en remet pas à la même tête qui a fabriqué la vidéo : chaque dimension que le brief demande est notée par **un juge séparé**, c'est-à-dire un sous-agent au contexte neuf à qui tu donnes uniquement la planche contact, la dimension à noter, ses ancres et les pièces que `grille-video.md` indique pour cette dimension (la liste des scènes de `src/contenu.js` pour le rythme, `klass/README.md` pour la charte, la fiche client et les notes d'appel pour le message). Il répond par une note ou par « Inconnu », et cite les cases de la planche qui justifient sa réponse. Tu lui donnes ces éléments, jamais ton raisonnement. Tu ne lances pas d'autre sous-agent : l'associé a un quota limité.
 
 Tu corriges d'après les notes et leurs citations, avec un budget fixe : **une boucle de correction**, sauf si l'associé en demande une autre. Garde les notes dans le message de PR ou dans ta réponse, pas dans des fichiers du dépôt.
 
@@ -66,4 +66,4 @@ Tu corriges d'après les notes et leurs citations, avec un budget fixe : **une b
 - Pendant la séance, tu travailles sur la branche nominative de l'associé (`prenom/video`) : tu la crées au début de l'exercice 1, à partir de `main`. Demande-lui son prénom si tu ne le connais pas.
 - Les rendus lourds (MP4, planche) ne vont **jamais** dans Git. Une PR « relis-moi » contient les sources (`src/`) ; sa description dit où se trouve le MP4 (« chez moi, je le passe par Chat ») et rappelle les notes de la grille.
 - Une PR « relis-moi » s'ouvre à la demande de l'associé, avant une porte à sens unique. Tu ne la fusionnes pas : la décision revient à la personne qui relit.
-- **Rien n'est envoyé au client, publié ni posté par toi** : ni la vidéo, ni un lien, ni un message. Tu t'arrêtes, tu dis ce qui est prêt, et l'associé décide. La vidéo « part chez le client demain » : elle n'est pas partie.
+- **Rien n'est envoyé au client, publié ni posté par toi** : ni la vidéo, ni un lien, ni un message. Tu t'arrêtes, tu dis ce qui est prêt, et l'associé décide. La vidéo « part chez le client demain » : elle n'est pas partie. Pourquoi : un envoi ne se rattrape pas, et c'est l'associé qui répond du résultat devant la cliente.
