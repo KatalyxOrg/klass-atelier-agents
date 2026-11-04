@@ -22,7 +22,7 @@ export default {
       if (!existsSync(join(dossier, f))) throw new Ecart(`${f} est absent du dépôt.`);
     }
     const script = readFileSync(join(dossier, SCRIPT), 'utf8');
-    if (/pdftoppm|poppler/i.test(script)) throw new Ecart(`${SCRIPT} passe par Poppler : il doit rester sur le Chrome headless.`);
+    if (/pdftoppm|pdftocairo/.test(script)) throw new Ecart(`${SCRIPT} passe par Poppler : il doit rester sur le Chrome headless.`);
     if (!/from 'playwright'/.test(script)) throw new Ecart(`${SCRIPT} n'utilise pas le Chrome headless de Playwright.`);
 
     executer(process.execPath, ['outils/rendre.mjs', 'exemple/proposition.md'], { cwd: join(dossier, 'proposition') });
