@@ -55,7 +55,7 @@ Une note sans case citée n'est pas recevable. La planche ne montre que des imag
 
 | Note | Ancre |
 |---|---|
-| **1** | La vidéo ne fait pas 20 secondes, ou une scène dure plus de 10 secondes, ou trois cases qui se suivent sont identiques : le temps n'est pas travaillé. |
+| **1** | La vidéo ne fait pas 20 secondes, ou une scène dure plus de 10 secondes, ou quatre cases qui se suivent sont identiques (plus de 6 secondes sans rien de neuf) : le temps n'est pas travaillé. |
 | **3** | La vidéo fait 20 secondes et les scènes se distinguent, mais une scène est trop courte pour son texte (moins d'une seconde pour 3 mots), ou la première case ne dit pas encore de quoi on parle, ou la fin s'étire sans rien ajouter. |
 | **5** | 20 secondes exactement. Chaque scène dure assez pour que son texte se lise à voix basse (au moins une seconde pour 3 mots) et apporte une idée neuve par rapport à la précédente. La première case pose le sujet, la dernière clôt. |
 

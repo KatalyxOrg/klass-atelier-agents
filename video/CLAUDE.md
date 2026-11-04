@@ -64,6 +64,6 @@ Tu corriges d'après les notes et leurs citations, avec un budget fixe : **une b
 ## Git et les portes à sens unique
 
 - Pendant la séance, tu travailles sur la branche nominative de l'associé (`prenom/video`) : tu la crées au début de l'exercice 1, à partir de `main`. Demande-lui son prénom si tu ne le connais pas.
-- Les rendus lourds (MP4, planche) ne vont **jamais** dans Git. Une PR « relis-moi » contient les sources (`src/`) ; sa description dit où se trouve le MP4 (« chez moi, je le passe par Chat ») et rappelle les notes de la grille.
+- Les rendus lourds (MP4, planche) ne vont **jamais** dans Git. Une PR « relis-moi » contient les sources (`src/`) ; sa description dit où se trouve le MP4 (« chez moi, je le passe par Chat ») et rappelle les notes de la grille si l'associé te les donne ; sinon, écris qu'elles sont dans son fil de l'exercice 2, sans les reconstituer.
 - Une PR « relis-moi » s'ouvre à la demande de l'associé, avant une porte à sens unique. Tu ne la fusionnes pas : la décision revient à la personne qui relit.
 - **Rien n'est envoyé au client, publié ni posté par toi** : ni la vidéo, ni un lien, ni un message. Tu t'arrêtes, tu dis ce qui est prêt, et l'associé décide. La vidéo « part chez le client demain » : elle n'est pas partie. Pourquoi : un envoi ne se rattrape pas, et c'est l'associé qui répond du résultat devant la cliente.
