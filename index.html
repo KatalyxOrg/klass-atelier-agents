@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Faire travailler des agents en confiance — Klass</title>
+<meta name="description" content="Page support de l'atelier Klass by Katalyx : faire travailler des agents en confiance, dans T3 Code.">
+<link rel="icon" href="klass/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="klass/svg/klass-app-icon.svg">
+<link rel="apple-touch-icon" href="klass/png/klass-app-icon-180.png">
+<link rel="stylesheet" href="klass/brand.css">
+<link rel="stylesheet" href="klass/polices.css">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--klass-white);color:var(--klass-ink);font:17px/1.6 var(--klass-font-text);-webkit-font-smoothing:antialiased}
+a{color:var(--klass-orange-strong)}
+a:hover{color:var(--klass-orange)}
+code,pre{font-family:var(--klass-font-mono)}
+code{font-size:.88em;background:var(--klass-paper);padding:1px 6px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--klass-font-display);line-height:1.12;letter-spacing:-.015em;margin:0}
+h1{font-size:clamp(36px,6vw,64px);font-weight:800}
+h2{font-size:clamp(28px,4vw,40px);font-weight:800}
+h3{font-size:22px;font-weight:700;margin:40px 0 10px}
+h4{font-size:17px;font-weight:700;margin:20px 0 6px}
+p,li{max-width:70ch}
+strong{font-weight:650}
+.u{color:var(--klass-orange)}
+
+/* Mise en page : navigation à gauche sur grand écran, en haut sur petit écran */
+.page{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}
+nav.sommaire{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;background:var(--klass-ink);color:var(--klass-white);padding:28px 20px}
+nav.sommaire img{height:36px;display:block;margin-bottom:28px}
+nav.sommaire ol{list-style:none;margin:0;padding:0}
+nav.sommaire li{margin:0}
+nav.sommaire a{display:flex;justify-content:space-between;gap:10px;padding:8px 10px;border-radius:8px;color:var(--klass-white);text-decoration:none;font-size:15px}
+nav.sommaire a:hover{background:#ffffff14;color:var(--klass-white)}
+nav.sommaire a span:last-child{color:#ffffff99;font-variant-numeric:tabular-nums;white-space:nowrap}
+nav.sommaire .total{margin-top:18px;padding:12px 10px 0;border-top:1px solid #ffffff22;font-size:14px;color:#ffffffb3}
+nav.sommaire .total strong{color:var(--klass-orange-on-dark)}
+main{padding:0 clamp(16px,5vw,72px) 96px;max-width:1080px}
+
+/* Couverture */
+.couverture{padding:64px 0 40px;border-bottom:1px solid var(--klass-border)}
+.couverture .lockup{height:56px;margin-bottom:40px}
+.couverture .surtitre{font-family:var(--klass-font-display);font-weight:700;color:var(--klass-orange-strong);text-transform:uppercase;letter-spacing:.08em;font-size:14px;margin:0 0 12px}
+.promesse{margin:28px 0 0;padding:22px 26px;background:var(--klass-ink);color:var(--klass-white);border-radius:16px;font-family:var(--klass-font-display);font-size:clamp(20px,2.6vw,26px);font-weight:700;line-height:1.3;max-width:none}
+.promesse em{font-style:normal;color:var(--klass-orange-on-dark)}
+
+/* Déroulé */
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--klass-border)}
+th{font-family:var(--klass-font-display);font-weight:700;background:var(--klass-paper)}
+td.duree{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600}
+tr.total td{font-weight:700;border-bottom:2px solid var(--klass-ink)}
+.tableau{overflow-x:auto}
+
+/* Sections */
+section.partie{padding:72px 0 8px;border-bottom:1px solid var(--klass-border)}
+.entete-partie{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;margin-bottom:20px}
+.entete-partie .numero{font-family:var(--klass-font-display);font-weight:800;font-size:15px;color:var(--klass-white);background:var(--klass-orange);border-radius:6px;padding:2px 8px}
+.entete-partie .minutes{font-weight:600;color:var(--klass-muted);font-size:15px}
+.chapeau{font-size:19px;color:var(--klass-muted)}
+
+/* Encarts */
+.encart{border:1px solid var(--klass-border);border-radius:14px;padding:18px 22px;margin:20px 0;background:var(--klass-white)}
+.encart > :first-child{margin-top:0}
+.encart > :last-child{margin-bottom:0}
+.encart.papier{background:var(--klass-paper);border-color:transparent}
+.encart.orange{background:var(--klass-orange-light);border-color:#f6c9b9}
+.encart.sombre{background:var(--klass-ink);color:var(--klass-white);border-color:transparent}
+.encart.sombre a{color:var(--klass-orange-on-dark)}
+.encart .titre-encart{font-family:var(--klass-font-display);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--klass-orange-strong);margin:0 0 6px}
+.encart.sombre .titre-encart{color:var(--klass-orange-on-dark)}
+.citation{border-left:4px solid var(--klass-orange);padding:4px 0 4px 18px;margin:20px 0;font-size:19px}
+.citation footer{font-size:14px;color:var(--klass-muted);margin-top:6px}
+.source{font-size:14px;color:var(--klass-muted)}
+
+/* Grilles de cartes */
+.cartes.quatre{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1100px){.cartes.quatre{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.cartes.quatre{grid-template-columns:1fr}}
+.cartes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:20px 0}
+.carte{border:1px solid var(--klass-border);border-radius:14px;padding:18px}
+.carte h4{margin-top:0}
+.carte p{margin:6px 0 0;font-size:15.5px}
+.carte .lettre{font-family:var(--klass-font-display);font-weight:800;font-size:44px;line-height:1;color:var(--klass-orange)}
+.carte .barreau{display:inline-block;margin-top:10px;font-size:13px;font-weight:600;background:var(--klass-paper);border-radius:999px;padding:2px 10px}
+
+/* Prompts et prompt links */
+pre.prompt{font-family:var(--klass-font-text);white-space:pre-wrap;background:var(--klass-paper);border-left:4px solid var(--klass-orange);border-radius:0 12px 12px 0;padding:18px 20px;font-size:14.5px;line-height:1.55;margin:12px 0;max-width:none}
+.prompt-link{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:16px 0;padding:14px 18px;border:2px dashed var(--klass-orange);border-radius:12px;max-width:none}
+.prompt-link .etiquette{font-family:var(--klass-font-display);font-weight:700}
+.prompt-link .a-venir{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--klass-white);background:var(--klass-muted);border-radius:999px;padding:2px 10px}
+.prompt-link a{font-weight:700}
+
+/* Étapes numérotées */
+ol.etapes{counter-reset:etape;list-style:none;padding:0;margin:16px 0}
+ol.etapes > li{counter-increment:etape;position:relative;padding:0 0 14px 48px;max-width:none}
+ol.etapes > li::before{content:counter(etape);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--klass-ink);color:var(--klass-white);font-family:var(--klass-font-display);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+
+/* Emplacements réservés aux parcours (remplis par d'autres tickets) */
+.emplacement{border:2px dashed var(--klass-border);border-radius:14px;padding:16px 20px;margin:20px 0;color:var(--klass-muted)}
+.emplacement > :first-child{margin-top:0}
+.emplacement > :last-child{margin-bottom:0}
+
+/* Schémas */
+figure.schema{margin:24px 0}
+figure.schema svg{width:100%;height:auto;display:block}
+figure.schema figcaption{font-size:14px;color:var(--klass-muted);margin-top:8px}
+
+.escalade{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.escalade li{border-radius:12px;background:var(--klass-paper);padding:14px 16px;display:flex;flex-direction:column;gap:4px;max-width:none;position:relative}
+.escalade li .quand{font-family:var(--klass-font-display);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--klass-orange-strong)}
+.escalade li strong{font-family:var(--klass-font-display);font-size:20px;font-weight:800;line-height:1.15}
+.escalade li span:last-child{font-size:14px;color:var(--klass-muted)}
+.escalade li.actif{background:var(--klass-orange);color:var(--klass-white)}
+.escalade li.actif .quand,.escalade li.actif span:last-child{color:var(--klass-white)}
+.escalade li.au-dela{background:none;border:2px dashed var(--klass-border)}
+@media (max-width:900px){.escalade{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.escalade{grid-template-columns:1fr}}
+.deux-colonnes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+footer.pied{padding:48px 0 0;color:var(--klass-muted);font-size:14px}
+footer.pied img{height:32px;display:block;margin-bottom:12px}
+
+@media (max-width:900px){
+  .page{grid-template-columns:1fr}
+  nav.sommaire{position:static;height:auto;padding:16px}
+  nav.sommaire img{height:30px;margin-bottom:12px}
+  nav.sommaire ol{display:flex;flex-wrap:wrap;gap:4px}
+  nav.sommaire a{padding:6px 10px;background:#ffffff10}
+  nav.sommaire a span:last-child{display:none}
+  nav.sommaire .total{margin-top:10px;padding-top:8px}
+  .deux-colonnes{grid-template-columns:1fr}
+}
+@media print{
+  .page{display:block}
+  nav.sommaire{display:none}
+  section.partie{break-before:page}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<nav class="sommaire" aria-label="Déroulé de la séance">
+  <img src="klass/svg/klass-lockup-compact-on-dark.svg" alt="Klass by Katalyx">
+  <ol>
+    <li><a href="#accueil"><span>1. Accueil</span><span>5 min</span></a></li>
+    <li><a href="#pourquoi"><span>2. Le pourquoi</span><span>8 min</span></a></li>
+    <li><a href="#briefer"><span>3. Briefer · exercice 1</span><span>12 min</span></a></li>
+    <li><a href="#environnement"><span>4. L'environnement</span><span>8 min</span></a></li>
+    <li><a href="#verification"><span>5. Vérification · exercice 2</span><span>15 min</span></a></li>
+    <li><a href="#orchestrer"><span>6. Orchestrer · exercice 3</span><span>7 min</span></a></li>
+    <li><a href="#mobile"><span>7. Mobile</span><span>3 min</span></a></li>
+    <li><a href="#cloture"><span>8. Ouverture et clôture</span><span>2 min</span></a></li>
+    <li><a href="#marge"><span>Marge</span><span>+30 min</span></a></li>
+    <li><a href="#vocabulaire"><span>Le vocabulaire</span><span></span></a></li>
+  </ol>
+  <p class="total"><strong>60 min</strong> de séance, puis <strong>30 min</strong> de marge.</p>
+</nav>
+
+<main>
+
+<header class="couverture">
+  <img class="lockup" src="klass/svg/klass-lockup.svg" alt="Klass by Katalyx">
+  <p class="surtitre">Atelier Klass · dans T3 Code</p>
+  <h1>Faire travailler des agents en confiance<span class="u">_</span></h1>
+  <p class="promesse">Passer de « je chatte avec Claude » à « <em>mon environnement fait travailler des agents en confiance</em> ».</p>
+
+  <h3>Le déroulé</h3>
+  <p>Chaque idée est suivie tout de suite de sa démonstration. Vous choisissez votre parcours d'exercices, <strong>Proposition</strong> (une proposition commerciale) ou <strong>Vidéo</strong> (une vidéo de 20 secondes), et vous suivez les trois mêmes étapes : <strong>briefer</strong>, donner <strong>des yeux et une grille</strong>, ouvrir une <strong>PR « relis-moi »</strong>.</p>
+  <div class="tableau">
+  <table>
+    <thead><tr><th>Durée</th><th>Partie</th><th>Ce qu'on y fait</th></tr></thead>
+    <tbody>
+      <tr><td class="duree">5 min</td><td><a href="#accueil">Accueil</a></td><td>La promesse ; le clone du dépôt et le check d'environnement par prompt link</td></tr>
+      <tr><td class="duree">8 min</td><td><a href="#pourquoi">Le pourquoi</a></td><td>De l'augmentation à l'agency ; l'échelle de confiance ; le meat proxy ; l'intention comme goulot</td></tr>
+      <tr><td class="duree">12 min</td><td><a href="#briefer">Briefer et exercice 1</a></td><td>Le gabarit de brief ; la démo ; exercice 1</td></tr>
+      <tr><td class="duree">8 min</td><td><a href="#environnement">L'environnement</a></td><td>Le dossier, CLAUDE.md et la mémoire ; Full access et portes à sens unique ; la source de vérité</td></tr>
+      <tr><td class="duree">15 min</td><td><a href="#verification">Vérification et exercice 2</a></td><td>Des yeux et une grille ; les démos ; exercice 2</td></tr>
+      <tr><td class="duree">7 min</td><td><a href="#orchestrer">Orchestrer et exercice 3</a></td><td>Le brouillon parallèle ; le nouveau flow d'équipe ; exercice 3, la PR « relis-moi »</td></tr>
+      <tr><td class="duree">3 min</td><td><a href="#mobile">Mobile</a></td><td>Lancer une tâche depuis son téléphone</td></tr>
+      <tr><td class="duree">2 min</td><td><a href="#cloture">Ouverture et clôture</a></td><td>Le dernier barreau ; les boucles externes ; le récapitulatif</td></tr>
+      <tr class="total"><td class="duree">60 min</td><td colspan="2">Fin de la séance</td></tr>
+      <tr><td class="duree">+30 min</td><td><a href="#marge">Marge</a></td><td>D'abord le débordement, puis l'atelier « à quel niveau va cette correction que je répète ? »</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="source">Le client des exercices, la <strong>Brûlerie Caravelle</strong> (un torréfacteur de café à Nantes), est fictif. Tout ce qu'il faut savoir sur lui est dans le dossier <code>sources/</code>.</p>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="partie" id="accueil">
+  <div class="entete-partie"><span class="numero">1</span><h2>Accueil</h2><span class="minutes">5 min</span></div>
+  <p class="chapeau">Un clic pour récupérer l'atelier, un brief à lire, et votre agent prépare l'ordinateur pendant que la séance commence.</p>
+
+  <h3>La promesse</h3>
+  <p>En sortant, vous saurez <strong>préparer un environnement</strong> où un agent travaille seul, et en qui vous pouvez avoir confiance : vous le <strong>briefez</strong>, vous lui donnez <strong>des yeux et une grille</strong> pour juger son travail, et vous gardez la main sur ce qui ne se rattrape pas.</p>
+
+  <h3>Récupérer l'atelier</h3>
+  <ol class="etapes">
+    <li><strong>Cliquez sur le prompt link d'accueil</strong>, collé dans le chat de la visio.
+      <p class="prompt-link" data-prompt-link="accueil"><span class="etiquette">Prompt link d'accueil</span><span class="a-venir">à venir</span></p>
+    </li>
+    <li><strong>« Où ouvrir ce lien ? »</strong> La première fois, votre navigateur vous le demande. Choisissez <strong>l'app de bureau</strong> et cochez <strong>« Remember my choice »</strong> : la question ne reviendra plus.</li>
+    <li><strong>Cliquez sur « Clone ».</strong> Vous n'avez pas encore le dépôt de l'atelier : T3 Code vous propose de le récupérer. Il crée le dossier sur votre ordinateur.</li>
+    <li><strong>Lisez le brouillon.</strong> Il est déjà rempli avec le check d'environnement (ci-dessous) et s'ouvre en <strong>Sonnet 5.5</strong>, pour préserver votre quota Claude Pro.</li>
+    <li><strong>Cliquez sur Envoyer.</strong> L'agent installe ce qui manque pendant que la séance continue : vous n'avez rien à taper.</li>
+  </ol>
+
+  <div class="encart orange">
+    <p class="titre-encart">Un prompt link ne lance rien tout seul</p>
+    <p>Il ouvre un <strong>brouillon</strong> : vous le lisez, puis c'est vous qui envoyez. Il ne change ni votre mode de permission, ni votre branche. T3 Code retire aussi les <strong>caractères invisibles</strong> (des caractères de largeur nulle qui pourraient cacher des consignes à l'agent) et vous prévient si le texte en contenait.</p>
+    <p><strong>Le réflexe à prendre :</strong> on lit avant d'envoyer, comme on relit un e-mail transféré avant de le faire suivre.</p>
+  </div>
+
+  <h3>Le check d'environnement</h3>
+  <p>Voici le texte que contient le prompt link d'accueil. C'est déjà un petit brief : l'objectif et le pourquoi, ce qu'il faut faire sur Mac et sous Windows, ce qu'il ne faut pas toucher, quand s'arrêter, et la forme de la réponse.</p>
+<pre class="prompt" id="prompt-accueil">Bonjour ! Je participe à l'atelier Klass « Faire travailler des agents en confiance », et ce projet est le dossier de l'atelier. Prépare mon ordinateur pour les exercices : ils produisent un PDF et ses images, et rendent une courte vidéo.
+
+Il me faut Node.js (version 20 ou plus récente), ffmpeg et Google Chrome.
+
+1. Regarde lesquels de ces trois outils sont déjà installés, et en quelle version.
+2. Installe ceux qui manquent, et mets à jour Node.js s'il est plus ancien que la version 20.
+   - Sur Mac : avec Homebrew s'il est là ; sinon, choisis la façon la plus simple qui ne demande pas de mot de passe administrateur.
+   - Sous Windows : avec winget.
+   Si une installation va me demander mon mot de passe ou une autorisation de Windows, préviens-moi d'abord, en une phrase, de ce que je vais voir.
+3. Installe les dépendances des dossiers proposition/ et video/ du projet, comme l'explique leur CLAUDE.md. Le premier rendu télécharge un navigateur intégré d'environ 120 Mo : autant le faire maintenant, pendant la présentation.
+
+N'écris rien dans les fichiers du projet (les dépendances installées ne comptent pas) et ne touche à rien d'autre sur l'ordinateur.
+
+Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà là » ou « installé ». Si quelque chose bloque, arrête-toi et dis-moi en une phrase ce que je dois faire.</pre>
+  <p class="source">Pendant que l'agent installe, la séance continue : l'installation est elle-même la première démonstration d'un agent qui travaille seul.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="partie" id="pourquoi">
+  <div class="entete-partie"><span class="numero">2</span><h2>Le pourquoi</h2><span class="minutes">8 min</span></div>
+  <p class="chapeau">Faire confiance à un agent n'est pas une affaire de formule magique. C'est une affaire d'environnement.</p>
+
+  <h3>De l'augmentation à l'agency</h3>
+  <div class="deux-colonnes">
+    <div class="encart papier">
+      <p class="titre-encart">Aujourd'hui · l'augmentation</p>
+      <p><strong>Vous réfléchissez avec l'IA.</strong> Vous posez une question, elle répond, vous reprenez, vous recopiez. C'est utile, mais tout passe par vous, message après message.</p>
+    </div>
+    <div class="encart sombre">
+      <p class="titre-encart">Demain · l'agency</p>
+      <p><strong>Vous préparez l'IA pour qu'elle agisse seule.</strong> Vous lui donnez un objectif, un dossier, des règles et de quoi juger son travail, puis vous la laissez faire et vous revenez voir le résultat.</p>
+    </div>
+  </div>
+  <p class="source">Ces deux modes d'interaction viennent du cadre AI Fluency (Rick Dakan, Joseph Feller et Anthropic) ; ils sont reformulés ici.</p>
+
+  <h3>L'échelle de confiance</h3>
+  <p>L'idée vient de <strong>Poteto</strong>, créateur de pstack, dans son live avec <strong>Matt Pocock</strong> : plus on fait confiance à ses agents, moins on les micro-manage, et plus on peut en faire tourner. La confiance ne se décrète pas : elle se construit, barreau par barreau. Ce sont les quatre barreaux de la séance.</p>
+  <figure class="schema">
+    <svg viewBox="0 0 760 330" role="img" aria-labelledby="echelle-titre">
+      <title id="echelle-titre">L'échelle de confiance : briefer, environnement, vérification, orchestrer</title>
+      <line x1="90" y1="300" x2="660" y2="60" stroke="#DEDEDE" stroke-width="2" stroke-dasharray="6 6"/>
+      <g font-family="Bricolage Grotesque, system-ui, sans-serif">
+        <rect x="0" y="240" width="185" height="70" rx="12" fill="#F2F2F2"/>
+        <text x="16" y="268" font-size="13" font-weight="700" fill="#B53A1C">BARREAU 1</text>
+        <text x="16" y="294" font-size="22" font-weight="800" fill="#0B0B0B">Briefer</text>
+        <rect x="190" y="170" width="185" height="70" rx="12" fill="#F2F2F2"/>
+        <text x="206" y="198" font-size="13" font-weight="700" fill="#B53A1C">BARREAU 2</text>
+        <text x="206" y="224" font-size="22" font-weight="800" fill="#0B0B0B">Environnement</text>
+        <rect x="380" y="100" width="185" height="70" rx="12" fill="#FDEBE4"/>
+        <text x="396" y="128" font-size="13" font-weight="700" fill="#B53A1C">BARREAU 3</text>
+        <text x="396" y="154" font-size="22" font-weight="800" fill="#0B0B0B">Vérification</text>
+        <rect x="570" y="30" width="185" height="70" rx="12" fill="#0B0B0B"/>
+        <text x="586" y="58" font-size="13" font-weight="700" fill="#F06A49">BARREAU 4</text>
+        <text x="586" y="84" font-size="22" font-weight="800" fill="#FFFFFF">Orchestrer</text>
+      </g>
+      <g font-family="Schibsted Grotesk, system-ui, sans-serif" font-size="15" fill="#575757">
+        <text x="20" y="40">Plus de confiance</text>
+        <text x="20" y="62">→ moins de micro-management</text>
+        <text x="20" y="84">→ plus d'agents en même temps</text>
+      </g>
+    </svg>
+    <figcaption>On ne saute pas de barreau : un agent mal briefé, dans un environnement vide et sans moyen de juger son travail, ne se laisse pas orchestrer.</figcaption>
+  </figure>
+
+  <h3>La cuisine étoilée</h3>
+  <div class="cartes">
+    <div class="carte"><h4>Le cuisinier amateur</h4><p>Il fait tout lui-même : la découpe, la cuisson, la vaisselle. C'est nous, quand nous reprenons chaque réponse de l'IA à la main.</p></div>
+    <div class="carte"><h4>La cuisine sans organisation</h4><p>Ajouter des commis sans organiser la cuisine, c'est le chaos. Plus d'agents ne veut pas dire plus de résultats.</p></div>
+    <div class="carte"><h4>Le chef</h4><p>Il ne cuisine plus tout lui-même : il organise la cuisine, les commandes, les réserves. <strong>L'environnement devient l'ingrédient</strong>, et le chef <strong>reste responsable du plat</strong> : c'est sa réputation qui est en jeu.</p></div>
+  </div>
+
+  <h3>Le meat proxy</h3>
+  <p>Le <strong>meat proxy</strong>, c'est l'humain qui fait l'intermédiaire entre l'agent et le résultat : il regarde à sa place, recopie, transmet. Le mot est de Poteto, et le cours cherche à l'éliminer.</p>
+  <figure class="schema">
+    <svg viewBox="0 0 760 210" role="img" aria-labelledby="proxy-titre">
+      <title id="proxy-titre">Avec un meat proxy, tout passe par vous ; sans, l'agent voit le résultat lui-même</title>
+      <g font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="700" font-size="17">
+        <text x="0" y="22" fill="#B53A1C" font-size="13">AUJOURD'HUI</text>
+        <rect x="0" y="36" width="150" height="50" rx="10" fill="#F2F2F2"/><text x="44" y="67" fill="#0B0B0B">L'agent</text>
+        <rect x="300" y="36" width="150" height="50" rx="10" fill="#E85431"/><text x="350" y="67" fill="#FFFFFF">Vous</text>
+        <rect x="600" y="36" width="150" height="50" rx="10" fill="#F2F2F2"/><text x="634" y="67" fill="#0B0B0B">Le résultat</text>
+        <text x="0" y="132" fill="#B53A1C" font-size="13">CE QU'ON VISE</text>
+        <rect x="0" y="146" width="150" height="50" rx="10" fill="#0B0B0B"/><text x="44" y="177" fill="#FFFFFF">L'agent</text>
+        <rect x="600" y="146" width="150" height="50" rx="10" fill="#F2F2F2"/><text x="634" y="177" fill="#0B0B0B">Le résultat</text>
+      </g>
+      <g stroke="#575757" stroke-width="2" fill="none">
+        <path d="M150 54 H300"/><path d="M300 68 H150"/><path d="M450 54 H600"/><path d="M600 68 H450"/>
+        <path d="M150 171 H600" stroke="#E85431" stroke-width="3"/>
+      </g>
+      <g font-family="Schibsted Grotesk, system-ui, sans-serif" font-size="13" fill="#575757">
+        <text x="170" y="104">copie, colle, décrit</text>
+        <text x="470" y="104">regarde à sa place</text>
+        <text x="262" y="162">l'agent a des yeux : il regarde lui-même son rendu</text>
+      </g>
+    </svg>
+  </figure>
+  <div class="encart papier">
+    <p class="titre-encart">Le meat proxy dans votre quotidien</p>
+    <ul>
+      <li>Vous copiez la réponse de Claude dans un document, puis vous recollez le document pour qu'il le corrige.</li>
+      <li>Vous ouvrez le PDF, vous voyez qu'un tableau déborde, et vous le lui décrivez avec des mots.</li>
+      <li>Vous allez chercher un prix dans un autre fichier pour le lui recopier.</li>
+    </ul>
+    <p>À chaque fois, c'est vous qui faites le lien. Le reste de la séance sert à le supprimer.</p>
+  </div>
+
+  <h3>L'intention est le nouveau goulot</h3>
+  <blockquote class="citation">Quand les modèles deviennent très bons, l'agent n'est plus le goulot d'étranglement. Le goulot, c'est votre capacité à exprimer clairement votre intention.
+    <footer>Poteto, live avec Matt Pocock (reformulé)</footer>
+  </blockquote>
+  <p>C'est pourquoi la séance commence par <strong>briefer</strong> : donner à l'agent ce qu'un nouveau collaborateur brillant mais sans contexte aurait besoin de savoir. Votre métier (savoir ce qu'est une bonne proposition, une bonne vidéo) compte plus que jamais.</p>
+
+  <h3>Les 4D, notre grille de lecture</h3>
+  <p>Le cadre AI Fluency décrit quatre compétences pour travailler avec l'IA. Elles recoupent l'échelle de confiance.</p>
+  <div class="cartes quatre">
+    <div class="carte"><span class="lettre">D</span><h4>Délégation</h4><p>Décider ce qu'on confie à l'IA, et quand : faire soi-même, briefer un agent, ou le mettre en boucle.</p><span class="barreau">Orchestrer</span></div>
+    <div class="carte"><span class="lettre">D</span><h4>Description</h4><p>Dire clairement ce qu'on attend : l'objectif, le contexte, la forme du résultat.</p><span class="barreau">Briefer · Environnement</span></div>
+    <div class="carte"><span class="lettre">D</span><h4>Discernement</h4><p>Juger avec justesse ce que l'IA a produit, sur pièces et sur critères.</p><span class="barreau">Vérification</span></div>
+    <div class="carte"><span class="lettre">D</span><h4>Diligence</h4><p>Rester responsable de ce qu'on fait avec l'IA, et de ce qui sort de chez nous.</p><span class="barreau">Les portes à sens unique</span></div>
+  </div>
+  <p class="source">D'après le cadre AI Fluency de Rick Dakan, Joseph Feller et Anthropic (Delegation, Description, Discernment, Diligence), cité et reformulé par Klass, avec nos propres visuels.</p>
+  <p class="source">Pour aller plus loin : le live de Poteto avec Matt Pocock, « shipping 1,000's of PR's a month » (YouTube), et les skills publiées par Matt Pocock (<code>mattpocock/skills</code> sur GitHub).</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="partie" id="briefer">
+  <div class="entete-partie"><span class="numero">3</span><h2>Briefer et exercice 1</h2><span class="minutes">12 min</span></div>
+
+<!-- EMPLACEMENT briefer-commun : parcours Proposition. Remplacer ce bloc par le gabarit de brief, le test du collègue, le pourquoi d'une consigne, le périmètre et la longueur. -->
+  <div class="emplacement" data-emplacement="briefer-commun">
+    <p><strong>À venir :</strong> le gabarit de brief en 7 rubriques et la démonstration.</p>
+  </div>
+<!-- FIN EMPLACEMENT briefer-commun -->
+
+  <h3>Exercice 1 · briefer</h3>
+
+<!-- EMPLACEMENT briefer-proposition : parcours Proposition. Remplacer ce bloc par l'énoncé de l'exercice 1 Proposition. -->
+  <div class="emplacement" data-emplacement="briefer-proposition">
+    <p><strong>À venir :</strong> l'énoncé de l'exercice 1, parcours Proposition.</p>
+  </div>
+<!-- FIN EMPLACEMENT briefer-proposition -->
+
+<!-- EMPLACEMENT briefer-video : parcours Vidéo. Remplacer ce bloc par l'encart Vidéo et l'énoncé de l'exercice 1 Vidéo. -->
+  <div class="emplacement" data-emplacement="briefer-video">
+    <p><strong>À venir :</strong> l'énoncé de l'exercice 1, parcours Vidéo.</p>
+  </div>
+<!-- FIN EMPLACEMENT briefer-video -->
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="partie" id="environnement">
+  <div class="entete-partie"><span class="numero">4</span><h2>L'environnement</h2><span class="minutes">8 min</span></div>
+  <p class="chapeau">Un bon brief se donne une fois. L'environnement, lui, travaille à chaque session, sans qu'on ait à le répéter.</p>
+
+  <h3>Un projet, c'est un dossier</h3>
+  <p>Dans T3 Code, un projet est <strong>un simple dossier</strong> sur votre ordinateur. Celui de l'atelier contient la <a href="#source-de-verite">source de vérité</a> (<code>sources/</code>), un dossier par parcours (<code>proposition/</code>, <code>video/</code>), le kit Klass (<code>klass/</code>) et cette page. Rien n'oblige à y mettre du code : c'est un dossier de travail, comme ceux que vous avez déjà, mais que l'agent sait lire.</p>
+  <div class="cartes">
+    <div class="carte"><h4>CLAUDE.md</h4><p>Un fichier texte à la racine du dossier, <strong>lu au début de chaque session</strong>. On y écrit ce que tout agent doit savoir en arrivant : qui on est, la charte, les règles de la maison. C'est le <strong>contexte permanent</strong>.</p></div>
+    <div class="carte"><h4>La mémoire automatique</h4><p>Claude prend aussi ses propres notes, à partir de vos corrections, et les relit à la session suivante. Vous pouvez les consulter et les modifier.</p></div>
+    <div class="carte"><h4>Les sous-dossiers</h4><p>Chaque parcours a son propre CLAUDE.md, lu en plus du premier quand l'agent travaille dans ce dossier.</p></div>
+  </div>
+
+  <h3>Ce que dit le CLAUDE.md de l'atelier</h3>
+  <p>Ouvrez <code>CLAUDE.md</code> à la racine du projet. En voici deux extraits.</p>
+  <div class="encart papier">
+    <p class="titre-encart">Ne devine pas, va chercher dans <code>sources/</code></p>
+    <p>« Un chiffre, un prix, un nom, une date ou une référence vient de là. S'il n'y est pas, ne le complète pas avec une valeur plausible : écris qu'il manque et demande-le. Pourquoi : un chiffre inventé dans une proposition est exactement l'erreur qu'un client remarque […]. »</p>
+  </div>
+  <div class="encart papier">
+    <p class="titre-encart">Les portes à sens unique : demande-moi avant</p>
+    <p>« Certaines actions sortent du dossier et ne se rattrapent pas. […] Avant l'une d'elles, arrête-toi, dis ce que tu t'apprêtes à faire, et attends mon accord : envoyer quelque chose au client ; publier ; envoyer un e-mail ou un message ; modifier un Drive ou tout autre document partagé à travers un connecteur ; annoncer un prix à quelqu'un hors de l'équipe. »</p>
+  </div>
+  <p>Remarquez la forme : pas de règles en majuscules, mais du <strong>contexte</strong>, avec le pourquoi.</p>
+
+<!-- EMPLACEMENT environnement-proposition : parcours Proposition. Remplacer ce bloc par la présentation du CLAUDE.md de proposition/. -->
+  <div class="emplacement" data-emplacement="environnement-proposition">
+    <p><strong>À venir :</strong> le CLAUDE.md du parcours Proposition.</p>
+  </div>
+<!-- FIN EMPLACEMENT environnement-proposition -->
+
+<!-- EMPLACEMENT environnement-video : parcours Vidéo. Remplacer ce bloc par la présentation du CLAUDE.md de video/. -->
+  <div class="emplacement" data-emplacement="environnement-video">
+    <p><strong>À venir :</strong> le CLAUDE.md du parcours Vidéo.</p>
+  </div>
+<!-- FIN EMPLACEMENT environnement-video -->
+
+  <h3 id="source-de-verite">La source de vérité</h3>
+  <p>La <strong>source de vérité</strong>, c'est le dossier où l'agent va chercher la vraie donnée (offres, tarifs, références) au lieu de deviner ou d'inventer. Ici, c'est <code>sources/</code> : la fiche de la Brûlerie Caravelle, son brief, les notes d'appel, nos offres, nos tarifs, nos références, et deux anciennes propositions, l'une gagnée et l'autre perdue. Un agent qui ne trouve pas une information dans la source de vérité la demande, il ne l'invente pas.</p>
+
+  <h3>Full access et portes à sens unique</h3>
+  <p>Nous travaillons en <strong>Full access</strong> : l'agent agit sans demander l'autorisation à chaque étape. C'est le réglage par défaut des nouveaux threads de T3 Code, et c'est un choix assumé. En échange, les actions qui ne se rattrapent pas sont écrites dans CLAUDE.md.</p>
+  <div class="tableau">
+  <table>
+    <thead><tr><th>Porte à double sens : on avance</th><th>Porte à sens unique : on demande avant</th></tr></thead>
+    <tbody>
+      <tr><td>Écrire, réécrire, supprimer un fichier du dossier</td><td>Envoyer une proposition ou une vidéo au client</td></tr>
+      <tr><td>Rendre un PDF, une vidéo, des images</td><td>Publier sur les réseaux, sur un site</td></tr>
+      <tr><td>Créer une branche, essayer deux versions</td><td>Envoyer un e-mail ou un message</td></tr>
+      <tr><td>Tout ce qui reste dans le dossier versionné</td><td>Modifier un Drive à travers un connecteur ; annoncer un prix</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><strong>Git rattrape tout ce qui reste dans le dossier.</strong> Chaque version est un point de sauvegarde, et T3 Code sait revenir en arrière. Mais le retour en arrière <strong>n'annule pas un e-mail envoyé</strong> ni une publication : c'est là, et seulement là, que se trouve le vrai risque.</p>
+
+  <div class="encart sombre">
+    <p class="titre-encart">Context not control</p>
+    <p>Le principe vient du management chez Netflix : <strong>donner à son équipe le contexte</strong> pour bien décider, plutôt que de tout contrôler soi-même. Sans pour autant lâcher la main : Netflix précise que ce n'est pas du management « hands-off ». Pour nos agents, c'est pareil : le Full access donne la liberté, CLAUDE.md donne le contexte, et nous restons responsables du résultat.</p>
+  </div>
+
+  <h3>Une demande, pas une garantie</h3>
+  <p>CLAUDE.md est <strong>du contexte, pas un verrou</strong>. L'agent le lit et le suit presque toujours, mais rien ne l'y oblige mécaniquement. Quand une action doit être bloquée à coup sûr, on passe par un <strong>hook</strong> : un petit script que Claude Code déclenche avant une action et qui peut l'empêcher. Nous n'en montrons pas aujourd'hui ; retenez seulement que le vrai verrou existe, et qu'il se pose au-delà de CLAUDE.md.</p>
+
+  <h3>La première marche de l'escalade</h3>
+  <p>Quand l'agent ne fait pas ce qu'on veut, on réfléchit dans un ordre précis : l'<strong>escalade brief → contexte permanent → skill</strong>.</p>
+  <figure class="schema">
+    <ol class="escalade" aria-label="L'escalade brief → contexte permanent → skill">
+      <li><span class="quand">D'abord</span><strong>Un meilleur brief</strong><span>Pour cette tâche-ci</span></li>
+      <li class="actif"><span class="quand">Correction faite deux fois</span><strong>Contexte permanent</strong><span>CLAUDE.md ou la mémoire</span></li>
+      <li><span class="quand">Troisième playbook identique</span><strong>Une skill</strong><span>Un workflow précis, non natif</span></li>
+      <li class="au-dela"><span class="quand">Au-delà</span><strong>Script ou hook</strong><span>Ce qui doit arriver à coup sûr</span></li>
+    </ol>
+  </figure>
+  <p>La première marche, c'est elle : <strong>une correction faite deux fois va dans CLAUDE.md</strong>. Si vous redites « jamais de prix sans la mention HT » à chaque proposition, ce n'est plus un problème de brief, c'est du contexte permanent. Une skill ne vient qu'après, et seulement pour un workflow précis que l'agent ne connaît pas : nous y reviendrons en clôture.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="partie" id="verification">
+  <div class="entete-partie"><span class="numero">5</span><h2>Vérification et exercice 2</h2><span class="minutes">15 min</span></div>
+
+<!-- EMPLACEMENT verification-commun : parcours Proposition. Remplacer ce bloc par la tension, des yeux et une grille, le hill climbing et le juge d'un autre fournisseur. -->
+  <div class="emplacement" data-emplacement="verification-commun">
+    <p><strong>À venir :</strong> des yeux et une grille, et les démonstrations.</p>
+  </div>
+<!-- FIN EMPLACEMENT verification-commun -->
+
+  <h3>Exercice 2 · des yeux et une grille</h3>
+
+<!-- EMPLACEMENT verification-proposition : parcours Proposition. Remplacer ce bloc par l'énoncé de l'exercice 2 Proposition. -->
+  <div class="emplacement" data-emplacement="verification-proposition">
+    <p><strong>À venir :</strong> l'énoncé de l'exercice 2, parcours Proposition.</p>
+  </div>
+<!-- FIN EMPLACEMENT verification-proposition -->
+
+<!-- EMPLACEMENT verification-video : parcours Vidéo. Remplacer ce bloc par l'encart Vidéo et l'énoncé de l'exercice 2 Vidéo. -->
+  <div class="emplacement" data-emplacement="verification-video">
+    <p><strong>À venir :</strong> l'énoncé de l'exercice 2, parcours Vidéo.</p>
+  </div>
+<!-- FIN EMPLACEMENT verification-video -->
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="partie" id="orchestrer">
+  <div class="entete-partie"><span class="numero">6</span><h2>Orchestrer et exercice 3</h2><span class="minutes">7 min</span></div>
+  <p class="chapeau">Un agent briefé, dans un bon environnement, qui sait juger son travail : on peut maintenant en faire tourner plusieurs.</p>
+
+  <h3>Le brouillon parallèle</h3>
+  <p>Un <strong>brouillon parallèle</strong>, c'est une version de travail qui ne touche pas la version de référence. Dans T3 Code, chaque thread peut avoir le sien (« New worktree ») : sa branche et son dossier. Plusieurs agents travaillent alors en même temps, sur le même projet, sans se marcher dessus.</p>
+  <div class="cartes">
+    <div class="carte"><h4>Plusieurs threads</h4><p>Un thread par livrable, chacun dans son brouillon parallèle : la proposition dans l'un, la vidéo dans l'autre.</p></div>
+    <div class="carte"><h4>Le même brief à deux modèles</h4><p>Vous envoyez un brief identique à deux modèles, chacun dans son brouillon. Vous comparez les deux résultats, et vous gardez le meilleur.</p></div>
+    <div class="carte"><h4>Un juge d'un autre fournisseur</h4><p>T3 Code pilote plusieurs fournisseurs. Si vous avez aussi Codex, par exemple, il peut relire ce que Claude a écrit, avec un autre regard. C'est une possibilité, pas un prérequis de l'atelier.</p></div>
+  </div>
+
+  <h3>Le nouveau flow d'équipe</h3>
+  <div class="deux-colonnes">
+    <div class="encart papier">
+      <p class="titre-encart">Avant</p>
+      <ul>
+        <li>Chacun travaille dans son coin.</li>
+        <li>Les documents et leurs versions circulent par WhatsApp ou Google Chat.</li>
+        <li>On ne sait plus quelle version est la bonne.</li>
+      </ul>
+    </div>
+    <div class="encart orange">
+      <p class="titre-encart">À partir de lundi</p>
+      <ul>
+        <li>Les <strong>sources</strong> vivent dans le dépôt, et on travaille <strong>directement sur <code>main</code></strong>.</li>
+        <li>On ouvre une <strong>PR « relis-moi »</strong> seulement avant une <strong>porte à sens unique</strong> : « ça part chez le client demain ».</li>
+        <li>Les <strong>rendus finaux</strong> (PDF, MP4) circulent toujours par Drive ou Chat.</li>
+      </ul>
+    </div>
+  </div>
+  <p>Un seul rituel nouveau, placé là où il protège vraiment. Ce qui change concrètement : on arrête de s'envoyer les <em>sources</em>.</p>
+  <p class="source">Pendant la séance, chacun travaille sur sa branche nominative (par exemple <code>prenom/proposition</code>), créée par l'agent à l'exercice 1 : trois brouillons parallèles visibles sur GitHub, sans conflit. En dehors du cours, la règle « directement sur <code>main</code> » s'applique.</p>
+
+  <h3>La relecture en rond</h3>
+  <p>À l'exercice 3, chacun fait ouvrir sa PR « relis-moi » par son agent, puis relit celle de l'associé suivant et la commente. <strong>On ne fusionne pas</strong> : relire et commenter suffit.</p>
+  <div class="tableau">
+  <table>
+    <thead><tr><th>Associé</th><th>Relit la PR de</th></tr></thead>
+    <tbody>
+      <tr><td>A</td><td>B</td></tr>
+      <tr><td>B</td><td>C</td></tr>
+      <tr><td>C</td><td>A</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="source">Les lettres A, B et C sont attribuées en début d'exercice.</p>
+
+<!-- EMPLACEMENT orchestrer-proposition : parcours Proposition. Remplacer ce bloc par l'énoncé de l'exercice 3 Proposition. -->
+  <div class="emplacement" data-emplacement="orchestrer-proposition">
+    <p><strong>À venir :</strong> l'énoncé de l'exercice 3, parcours Proposition.</p>
+  </div>
+<!-- FIN EMPLACEMENT orchestrer-proposition -->
+
+<!-- EMPLACEMENT orchestrer-video : parcours Vidéo. Remplacer ce bloc par l'énoncé de l'exercice 3 Vidéo. -->
+  <div class="emplacement" data-emplacement="orchestrer-video">
+    <p><strong>À venir :</strong> l'énoncé de l'exercice 3, parcours Vidéo.</p>
+  </div>
+<!-- FIN EMPLACEMENT orchestrer-video -->
+
+  <h3>« Pourquoi pas Cowork ? »</h3>
+  <p>La question est légitime. <strong>Cowork</strong>, dans Claude Desktop, est pensé pour les non-développeurs, et ses tâches planifiées tournent dans le cloud, même ordinateur éteint. Mais il ne fonctionne qu'avec Claude, il n'intègre pas Git, et ses sessions ne se partagent pas.</p>
+  <p>T3 Code apporte ce dont l'équipe a besoin ici : <strong>plusieurs fournisseurs</strong> au même endroit (un relecteur d'un autre modèle), <strong>Git et les PR intégrés</strong>, l'<strong>open source</strong>, et <strong>le même outil pour toute l'équipe</strong>.</p>
+
+  <div class="encart papier">
+    <p class="titre-encart">D'autres façons de partager, pour mémoire</p>
+    <p>Les <strong>guest links</strong> de T3 Code (en bêta) laissent un collègue suivre un thread dans son navigateur pendant 24 h. Les <strong>artifacts</strong> publient une page sur claude.ai. Nous ne les utilisons pas aujourd'hui.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="partie" id="mobile">
+  <div class="entete-partie"><span class="numero">7</span><h2>Mobile</h2><span class="minutes">3 min</span></div>
+  <p class="chapeau">Lancez une tâche depuis votre téléphone, et allez prendre un café.</p>
+  <ol class="etapes">
+    <li><strong>Installez l'app T3 Code</strong> sur votre téléphone : <a href="https://apps.apple.com/us/app/t3-code-remote-claude-more/id6787819824">App Store (iPhone)</a> ou <a href="https://play.google.com/store/apps/details?id=com.t3tools.t3code">Google Play (Android)</a>.</li>
+    <li><strong>Rendez votre ordinateur joignable.</strong> Dans l'app de bureau, ouvrez <strong>Settings → Sharing &amp; access</strong>, connectez-vous et activez <strong>T3 Connect</strong>.</li>
+    <li><strong>Reliez le téléphone.</strong> Dans l'app mobile, connectez-vous au même compte T3 Connect et choisissez votre ordinateur.</li>
+    <li><strong>Lancez une tâche</strong> dans le projet de l'atelier, par exemple : « Résume en cinq lignes ce que la Brûlerie Caravelle attend de nous, d'après sources/. » Puis rangez le téléphone : l'agent travaille sans vous.</li>
+  </ol>
+  <div class="encart orange">
+    <p class="titre-encart">Le téléphone n'est qu'une télécommande</p>
+    <p>C'est <strong>votre ordinateur qui travaille</strong>. Il doit rester allumé, connecté, avec l'app T3 Code ouverte : fermer sa dernière fenêtre arrête le serveur local.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="partie" id="cloture">
+  <div class="entete-partie"><span class="numero">8</span><h2>Ouverture et clôture</h2><span class="minutes">2 min</span></div>
+
+<!-- EMPLACEMENT cloture-skill : parcours Proposition. Remplacer ce bloc par la présentation de la skill /proposition-klass, dernier barreau de l'escalade. -->
+  <div class="emplacement" data-emplacement="cloture-skill">
+    <p><strong>À venir :</strong> la skill <code>/proposition-klass</code>, le dernier barreau de l'escalade.</p>
+  </div>
+<!-- FIN EMPLACEMENT cloture-skill -->
+
+  <h3>Le récapitulatif</h3>
+  <div class="tableau">
+  <table>
+    <thead><tr><th>Barreau</th><th>Ce qu'on retient</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Briefer</strong></td><td>Donner à l'agent ce qu'un nouveau collaborateur brillant mais sans contexte aurait besoin de savoir.</td></tr>
+      <tr><td><strong>Environnement</strong></td><td>Un dossier, un CLAUDE.md, une source de vérité ; les portes à sens unique écrites comme du contexte.</td></tr>
+      <tr><td><strong>Vérification</strong></td><td>Pas de « vérifie » : des yeux et une grille.</td></tr>
+      <tr><td><strong>Orchestrer</strong></td><td>Des brouillons parallèles, et une PR « relis-moi » avant chaque porte à sens unique.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Et après ?</h3>
+  <div class="cartes">
+    <div class="carte"><h4>Les boucles externes</h4><p>Aujourd'hui, c'est vous qui lancez l'agent. Demain, c'est un événement : une <strong>tâche planifiée</strong> (chaque lundi, une veille sur un prospect), ou un <strong>webhook</strong> (un formulaire rempli, un e-mail reçu). T3 Code les propose dans les réglages du projet.</p></div>
+    <div class="carte"><h4>La vidéo</h4><p>La même méthode vaut pour la vidéo : un projet de départ, des yeux (une planche contact), une grille. Ceux qui ont pris le parcours Proposition peuvent faire le parcours Vidéo à leur rythme, avec cette page.</p></div>
+    <div class="carte"><h4>D'autres cours</h4><p>Ce premier cours Klass pose les bases. D'autres pourront suivre, à partir de ce que vous en ferez dès lundi.</p></div>
+  </div>
+  <p>Cette page reste dans votre dossier : <code>index.html</code>. Demandez à votre agent de vous l'ouvrir quand vous voulez.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="partie" id="marge">
+  <div class="entete-partie"><span class="numero">+</span><h2>Marge</h2><span class="minutes">+30 min</span></div>
+  <p class="chapeau">La marge absorbe d'abord le débordement : on ne coupe pas un exercice en cours. Le temps qui reste sert à l'atelier.</p>
+
+  <h3>Atelier · à quel niveau va cette correction que je répète ?</h3>
+  <p><strong>L'objectif :</strong> repartir avec une correction de votre vrai travail rangée au bon niveau de l'<strong>escalade brief → contexte permanent → skill</strong>. Comptez 20 minutes.</p>
+  <ol class="etapes">
+    <li><strong>Repérez une correction que vous répétez.</strong> Parcourez vos dernières conversations avec Claude (sur claude.ai ou dans T3 Code) et cherchez ce que vous avez dû redire : un ton, une longueur, un format, une donnée qu'il invente. Le prompt link ci-dessous vous aide à les repérer.
+      <p class="prompt-link" data-prompt-link="marge"><span class="etiquette">Prompt link de l'atelier</span><span class="a-venir">à venir</span></p>
+    </li>
+    <li><strong>Rangez-la au bon niveau</strong>, avec le tableau ci-dessous.</li>
+    <li><strong>Écrivez la phrase</strong> que vous mettriez dans votre brief ou dans votre CLAUDE.md, et dites-la aux autres en une minute.</li>
+  </ol>
+  <div class="tableau">
+  <table>
+    <thead><tr><th>Si la correction…</th><th>Elle va…</th><th>Exemple</th></tr></thead>
+    <tbody>
+      <tr><td>ne concerne que cette tâche</td><td>dans le <strong>brief</strong></td><td>« Cette proposition fait trois pages au plus. »</td></tr>
+      <tr><td>revient d'une tâche à l'autre (faite deux fois)</td><td>dans le <strong>contexte permanent</strong> : CLAUDE.md ou la mémoire</td><td>« Nos prix s'affichent toujours hors taxes, avec la mention HT. »</td></tr>
+      <tr><td>est un même déroulé en plusieurs étapes, recollé pour la troisième fois</td><td>dans une <strong>skill</strong>, et seulement si l'agent ne sait pas déjà le faire</td><td>« Préparer une proposition : lire les sources, rédiger, rendre le PDF, noter avec la grille. »</td></tr>
+      <tr><td>doit arriver, ou ne jamais arriver, à coup sûr</td><td>au-delà : un <strong>script</strong> ou un <strong>hook</strong></td><td>« Aucun e-mail ne part sans validation. »</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h4>Le texte du prompt link de l'atelier</h4>
+<pre class="prompt" id="prompt-marge">J'utilise Claude depuis des mois en conversation, et je reprends souvent les mêmes choses dans ses réponses. Aide-moi à repérer ces corrections répétées, pour décider où chacune doit vivre.
+
+Je vais te coller quelques extraits de mes anciennes conversations, là où j'ai dû reprendre ta réponse. Si je n'en ai pas sous la main, pose-moi plutôt cinq questions courtes sur mon travail : le type de documents que je produis, ce que je corrige le plus souvent, ce qui m'agace.
+
+Ensuite, rends-moi un tableau de trois à cinq lignes : la correction, à quelle fréquence elle revient, et où elle doit aller :
+- dans le brief, si elle ne concerne qu'une tâche ;
+- dans le contexte permanent (CLAUDE.md ou la mémoire), si elle revient d'une tâche à l'autre ;
+- dans une skill, seulement si c'est un même déroulé en plusieurs étapes que je recolle pour la troisième fois.
+Pour chaque ligne, propose la phrase exacte que j'écrirais.
+
+N'écris rien dans les fichiers : c'est moi qui choisirai ce que je garde.</pre>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section class="partie" id="vocabulaire">
+  <div class="entete-partie"><h2>Le vocabulaire de l'atelier</h2></div>
+  <p class="chapeau">Les mots du cours, employés tels quels dans les supports, les exercices et par les agents.</p>
+  <div class="tableau">
+  <table>
+    <thead><tr><th>Terme</th><th>Ce qu'il veut dire</th></tr></thead>
+    <tbody>
+      <tr><td><strong>briefer</strong></td><td>Donner à un agent tout ce qu'un nouveau collaborateur brillant mais sans contexte aurait besoin de savoir : objectif et pourquoi, pour qui, sources à lire, livrable, périmètre, critères de succès, quand s'arrêter ou demander. On ne dit pas « prompter » : on ne cherche pas une formule magique, on donne du contexte à un collaborateur.</td></tr>
+      <tr><td><strong>échelle de confiance</strong></td><td>La progression de Poteto (<em>trust ladder</em>) : plus on fait confiance à ses agents, moins on les micro-manage et plus on peut en faire tourner. Barreaux du cours : briefer → environnement → vérification → orchestrer.</td></tr>
+      <tr><td><strong>meat proxy</strong></td><td>L'humain qui fait l'intermédiaire entre l'agent et le résultat (il regarde à sa place, recopie, transmet). Le cours cherche à l'éliminer.</td></tr>
+      <tr><td><strong>des yeux et une grille</strong></td><td>La vérification telle que le cours l'enseigne : on ne dit pas à l'agent « vérifie », on lui donne <strong>des yeux</strong> (le rendu réel : pages du PDF en images, planche contact d'une vidéo) et <strong>une grille</strong> (des critères notés, par des juges séparés).</td></tr>
+      <tr><td><strong>porte à sens unique / porte à double sens</strong></td><td>Une action irréversible (envoi au client, publication, e-mail, modification d'un Drive, prix annoncé) ou réversible (tout ce qui reste dans le dossier versionné par Git). D'après Bezos, repris par Poteto.</td></tr>
+      <tr><td><strong>brouillon parallèle</strong></td><td>Une branche ou un worktree : une version de travail qui ne touche pas la version de référence.</td></tr>
+      <tr><td><strong>PR « relis-moi »</strong></td><td>Une pull request ouverte seulement avant une porte à sens unique, pour demander à un associé de relire. Le reste du travail va directement sur <code>main</code>.</td></tr>
+      <tr><td><strong>source de vérité</strong></td><td>Le dossier où l'agent doit aller chercher la vraie donnée (offres, tarifs, références) au lieu de deviner ou d'inventer.</td></tr>
+      <tr><td><strong>escalade brief → contexte permanent → skill</strong></td><td>L'ordre de réflexion avant d'outiller un agent : d'abord un meilleur brief, puis du contexte permanent (CLAUDE.md, mémoire) quand une correction revient, puis une skill seulement pour un workflow précis et non natif. Au-delà : script ou hook.</td></tr>
+      <tr><td><strong>context not control</strong></td><td>Principe de management Netflix : donner du contexte plutôt que contrôler, sans pour autant lâcher la main. Il justifie le Full access accompagné des portes à sens unique écrites dans CLAUDE.md.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<footer class="pied">
+  <img src="klass/svg/klass-lockup-compact.svg" alt="Klass by Katalyx">
+  <p>Atelier « Faire travailler des agents en confiance » · Klass by Katalyx · novembre 2026.<br>La Brûlerie Caravelle, ses personnes et ses chiffres sont fictifs.</p>
+</footer>
+
+</main>
+</div>
+</body>
+</html>
