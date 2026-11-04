@@ -16,6 +16,6 @@ Chaque dimension a été notée par **un juge isolé**, un sous-agent Claude au 
 
 ## Ce que les notes nous apprennent
 
-- **Trois juges ont buté sur le même passage**, le « [à demander : …] » de la page 1. C'est la règle « ne devine pas » qui a joué : l'outil de la boutique n'est pas dans `sources/`. Les juges ont raison sur le fond, puisqu'une note entre crochets ne part pas chez la cliente. Mais la décision revient à l'associé : poser la question avant l'envoi.
+- **Trois juges ont relevé le même passage**, le « [à demander : …] » de la page 1 : les juges des dimensions 1 et 6 dans leur note, celui de la dimension 7 en marge de la sienne. C'est la règle « ne devine pas » qui a joué : l'outil de la boutique n'est pas dans `sources/`. Les juges ont raison sur le fond, puisqu'une note entre crochets ne part pas chez la cliente. Mais la décision revient à l'associé : poser la question avant l'envoi.
 - **Un juge a signalé ce qu'il ne pouvait pas contrôler.** Le juge de la valeur chiffrée n'avait pas reçu le brief de la cliente : il a noté que « 500 abonnés d'ici fin 2027 » n'était pas dans ses sources, au lieu de le tenir pour vrai. Le chiffre est bien dans `sources/client/brief-client.md`. Un juge isolé ne sait que ce qu'on lui donne.
 - **Les notes, c'est nous qui les jugeons.** Cinq notes sur sept à 5 et aucune sous 4 : c'est le moment de se méfier du hill climbing : une grille se satisfait vite. On lit un échantillon, et on garde le dernier mot.
