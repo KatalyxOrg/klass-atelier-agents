@@ -222,16 +222,16 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
         <line x1="90" y1="300" x2="660" y2="60" stroke-width="2" stroke-dasharray="6 6" class="t-bord"/>
         <rect x="0" y="240" width="185" height="72" rx="12" class="f-fond"/>
         <text x="16" y="268" font-size="13" class="tm f-accent-texte">BARREAU 1</text>
-        <text x="16" y="296" font-size="23" class="tt f-encre">Briefer</text>
+        <text x="16" y="296" font-size="21" class="tt f-encre">Briefer</text>
         <rect x="190" y="170" width="185" height="72" rx="12" class="f-fond"/>
         <text x="206" y="198" font-size="13" class="tm f-accent-texte">BARREAU 2</text>
-        <text x="206" y="226" font-size="23" class="tt f-encre">Environnement</text>
+        <text x="206" y="226" font-size="21" class="tt f-encre">Environnement</text>
         <rect x="380" y="100" width="185" height="72" rx="12" class="f-accent-clair"/>
         <text x="396" y="128" font-size="13" class="tm f-accent-texte">BARREAU 3</text>
-        <text x="396" y="156" font-size="23" class="tt f-encre">Vérification</text>
+        <text x="396" y="156" font-size="21" class="tt f-encre">Vérification</text>
         <rect x="570" y="30" width="185" height="72" rx="12" class="f-accent"/>
         <text x="586" y="58" font-size="13" class="tm f-sur-accent">BARREAU 4</text>
-        <text x="586" y="86" font-size="23" class="tt f-sur-accent">Orchestrer</text>
+        <text x="586" y="86" font-size="21" class="tt f-sur-accent">Orchestrer</text>
         <text x="16" y="40" font-size="17" class="tt f-encre">Plus de confiance</text>
         <text x="16" y="66" font-size="16" class="f-doux">→ moins de micro-management</text>
         <text x="16" y="90" font-size="16" class="f-doux">→ plus d'agents en même temps</text>
@@ -355,7 +355,7 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
           <rect x="194" y="10" width="178" height="150" rx="14" class="f-fond"/>
           <circle cx="224" cy="42" r="17" class="f-accent"/><text x="224" y="48" text-anchor="middle" font-size="17" class="tt f-sur-accent">2</text>
           <text x="212" y="92" font-size="19" class="tt f-encre">Pour qui</text>
-          <text x="212" y="144" font-size="15" class="f-doux">ce qui compte pour lui</text>
+          <text x="212" y="144" font-size="15" class="f-doux">lecteur, décideur</text>
         </g>
         <g>
           <rect x="388" y="10" width="178" height="150" rx="14" class="f-fond"/>
@@ -440,7 +440,7 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
       </div>
     </div>
     <p>Pour le périmètre et la longueur : « Trois pages au plus. Seulement ce fichier. Pas de refonte de la boutique. »</p>
-    <p class="source">L'exemple d'Anthropic : plutôt que « NEVER use ellipses », expliquer que le texte sera lu par une synthèse vocale, qui ne sait pas prononcer les points de suspension. « Claude can generalize from the explanation. »</p>
+    <p class="source">L'exemple d'Anthropic : plutôt que « NEVER use ellipses » (« n'utilise JAMAIS de points de suspension »), expliquer que le texte sera lu par une synthèse vocale, qui ne sait pas prononcer les points de suspension. « Claude can generalize from the explanation » : Claude sait généraliser à partir de l'explication.</p>
   </div>
 
   <div class="bloc">
@@ -468,7 +468,7 @@ Quand c'est fini, réponds par un petit tableau : l'outil, sa version, « déjà
         <li><strong>Cliquez sur le prompt link de départ.</strong> Il ouvre un brouillon en Sonnet 5.5 : remplacez <code>[à compléter]</code> par votre prénom, lisez, puis envoyez. L'agent crée votre branche nominative, par exemple <code>camille/proposition</code> : c'est votre <strong>brouillon parallèle</strong>, il ne gêne personne.</li>
         <li><strong>Écrivez votre brief</strong> dans le même thread, avec le gabarit en 7 rubriques. Votre livrable : <code>proposition/&lt;prénom&gt;/proposition.md</code>, un fichier Markdown (un fichier texte simple, que le rendu mettra en page). Le PDF viendra à l'exercice 2 : ne le demandez pas encore.</li>
         <li><strong>Faites le test du collègue.</strong> Un associé arrivé ce matin saurait-il pour qui écrire, où trouver les prix, quelle longueur viser, et quand vous appeler ?</li>
-        <li><strong>Envoyez, puis ouvrez le fichier</strong> que l'agent a écrit (le panneau des fichiers de T3 Code l'affiche). Les prix sont-ils ceux de <code>sources/katalyx/tarifs.md</code> ? La cliente retrouverait-elle ses mots ?</li>
+        <li><strong>Envoyez, puis ouvrez le fichier</strong> que l'agent a écrit (demandez-lui de vous l'ouvrir). Les prix sont-ils ceux de <code>sources/katalyx/tarifs.md</code> ? La cliente retrouverait-elle ses mots ?</li>
       </ol>
       <p class="prompt-link" data-prompt-link="proposition-1"><span class="etiquette">Prompt link · exercice 1 Proposition</span><a href="https://app.t3.codes/new?prompt=Je%20commence%20l%27exercice%201%20du%20parcours%20Proposition%20de%20l%27atelier.%20Mon%20pr%C3%A9nom%20%3A%20%5B%C3%A0%20compl%C3%A9ter%5D.%0A%0ACr%C3%A9e%20ma%20branche%20nominative%20%C3%A0%20partir%20de%20main%2C%20nomm%C3%A9e%20pr%C3%A9nom%2Fproposition%20%28en%20minuscules%20et%20sans%20accent%29%2C%20et%20place-toi%20dessus.%20Cr%C3%A9e%20aussi%20le%20dossier%20proposition%2Fpr%C3%A9nom%2F.%0A%0ANe%20r%C3%A9dige%20rien%20d%27autre%20%3A%20mon%20brief%20arrive%20dans%20le%20message%20suivant.%20R%C3%A9ponds%20seulement%20par%20le%20nom%20de%20la%20branche.&amp;repo=KatalyxOrg/klass-atelier-agents&amp;provider=claude&amp;model=claude-sonnet-5-5">Ouvrir le brouillon dans T3 Code</a></p>
       <p class="source">Fini en avance ? Notez ce que vous auriez ajouté à votre brief en voyant le résultat : c'est la matière de l'exercice 2, et peut-être de votre futur CLAUDE.md.</p>
@@ -594,7 +594,7 @@ Ne modifie rien d'autre et ne rends rien : mon brief arrive dans le message suiv
   </div>
 
   <div class="bloc">
-    <h3>Full access et portes à sens unique</h3>
+    <h3>Les portes à sens unique</h3>
     <figure class="schema">
       <svg viewBox="0 0 760 300" role="img" aria-labelledby="sch-portes">
         <title id="sch-portes">Porte à double sens : tout ce qui reste dans le dossier versionné, Git le rattrape. Porte à sens unique : ce qui sort du dossier ne se rattrape pas</title>
@@ -620,16 +620,24 @@ Ne modifie rien d'autre et ne rends rien : mon brief arrive dans le message suiv
       </svg>
     </figure>
     <ul class="cles">
-      <li><strong>Full access :</strong> l'agent agit sans demander l'autorisation à chaque étape. C'est un choix assumé.</li>
       <li>Ce qui reste dans le dossier est une <strong>porte à double sens</strong> : Git rattrape tout.</li>
-      <li>Ce qui sort du dossier est une <strong>porte à sens unique</strong> : le retour en arrière n'annule pas un e-mail envoyé. Ces portes sont écrites dans CLAUDE.md.</li>
+      <li>Ce qui sort du dossier est une <strong>porte à sens unique</strong> : le retour en arrière n'annule pas un e-mail envoyé.</li>
+      <li>Les portes à sens unique sont écrites dans CLAUDE.md : l'agent demande avant.</li>
+    </ul>
+    <p class="source">Git garde chaque version comme un point de sauvegarde, et T3 Code sait revenir en arrière.</p>
+  </div>
+
+  <div class="bloc">
+    <h3>Full access, context not control</h3>
+    <ul class="cles">
+      <li><strong>Full access :</strong> l'agent agit sans demander l'autorisation à chaque étape. C'est un choix assumé.</li>
       <li><strong>Context not control :</strong> le Full access donne la liberté, CLAUDE.md le contexte, et nous restons responsables du résultat.</li>
     </ul>
-    <div class="encart sombre">
+    <div class="encart sombre pres">
       <p class="titre-encart">Context not control</p>
       <p>Le principe vient du management chez Netflix : <strong>donner à son équipe le contexte</strong> pour bien décider, plutôt que de tout contrôler soi-même. Sans lâcher la main pour autant : Netflix précise que ce n'est pas du management « hands-off ».</p>
     </div>
-    <p class="source">Le Full access est le réglage par défaut des nouveaux threads de T3 Code. Git garde chaque version comme un point de sauvegarde, et T3 Code sait revenir en arrière.</p>
+    <p class="source">Le Full access est le réglage par défaut des nouveaux threads de T3 Code.</p>
   </div>
 
   <div class="bloc">
@@ -706,7 +714,7 @@ Ne modifie rien d'autre et ne rends rien : mon brief arrive dans le message suiv
       <li><strong>Poteto :</strong> la vérification est la compétence n°1 ; sans elle, l'humain reste le meat proxy.</li>
       <li><strong>La résolution :</strong> on ne dit pas « vérifie », on donne <strong>des yeux</strong> (le rendu réel) et <strong>une grille</strong> (des critères notés par des juges séparés).</li>
     </ul>
-    <p class="source">Guide de prompting de Claude Opus 5 ; live de Poteto avec Matt Pocock. Anthropic va dans le même sens : la vision du modèle est meilleure quand il a des outils pour regarder son rendu.</p>
+    <p class="source">Le guide d'Anthropic pour Claude Opus 5 ; le live de Poteto avec Matt Pocock. Anthropic va dans le même sens : la vision du modèle est meilleure quand il a des outils pour regarder son rendu.</p>
   </div>
 
   <div class="bloc">
@@ -813,7 +821,7 @@ Ne modifie rien d'autre et ne rends rien : mon brief arrive dans le message suiv
       <p>Chaque juge ne reçoit que la planche, les ancres de sa dimension et les pièces que la grille lui assigne (la liste des scènes pour le rythme, les sources pour le message). Il cite les cases qui justifient sa note. La planche ne montre que des images fixes : ce qui dépend du mouvement reste « Inconnu ».</p>
     </div>
 
-    <p class="source">Les règles du juge viennent d'Anthropic, <em>Demystifying evals for AI agents</em> : « grade each dimension with an isolated LLM-as-judge », et lui permettre de « return 'Unknown' ». Un juge d'un autre fournisseur (Codex, par exemple) pourrait aussi noter ce que Claude a écrit, avec un autre regard : nous le citons seulement, car il demande un autre abonnement.</p>
+    <p class="source">Les règles du juge viennent d'Anthropic, <em>Demystifying evals for AI agents</em> : « grade each dimension with an isolated LLM-as-judge » (noter chaque dimension avec un juge isolé), et lui permettre de « return 'Unknown' » (répondre « Inconnu »). Un juge d'un autre fournisseur (Codex, par exemple) pourrait aussi noter ce que Claude a écrit, avec un autre regard : nous le citons seulement, car il demande un autre abonnement.</p>
   </div>
 
   <div class="bloc">
@@ -1116,7 +1124,7 @@ N'enregistre rien, ne pousse rien et n'ouvre pas encore de PR : ma demande pour 
   <p class="chapeau">Le dernier barreau de l'escalade, ce qui vient après, et ce qu'on retient.</p>
 
   <div class="bloc">
-    <h3>Le dernier barreau : la skill <code>/proposition-klass</code></h3>
+    <h3>Le dernier barreau : la skill</h3>
     <figure class="schema">
       <svg viewBox="0 0 760 256" role="img" aria-labelledby="sch-escalade-2">
         <title id="sch-escalade-2">L'escalade brief → contexte permanent → skill, au-delà script ou hook ; la skill /proposition-klass est le dernier barreau</title>
@@ -1140,9 +1148,9 @@ N'enregistre rien, ne pousse rien et n'ouvre pas encore de PR : ma demande pour 
       </svg>
     </figure>
     <ul class="cles">
-      <li>La skill est le <strong>dernier barreau</strong> de l'<strong>escalade brief → contexte permanent → skill</strong>.</li>
-      <li>On ne la monte qu'au <strong>troisième playbook identique</strong> : le même déroulé en plusieurs étapes, recollé pour la troisième fois.</li>
-      <li>Elle est déjà prête dans le dossier, et réunit ce que vous avez construit : le déroulé, la grille, le script de rendu.</li>
+      <li>La skill <code>/proposition-klass</code> est le <strong>dernier barreau</strong> de l'<strong>escalade brief → contexte permanent → skill</strong>.</li>
+      <li>On ne la monte qu'au <strong>troisième playbook identique</strong>.</li>
+      <li>Elle est déjà prête : le déroulé, la grille, le script de rendu.</li>
     </ul>
     <div class="cartes">
       <div class="carte"><h4>Le déroulé</h4><p>Lire la source de vérité, rédiger selon le plan qui a gagné, rendre et regarder, noter, rendre compte, s'arrêter avant toute porte à sens unique.</p></div>
@@ -1184,7 +1192,7 @@ N'enregistre rien, ne pousse rien et n'ouvre pas encore de PR : ma demande pour 
   <p class="chapeau">La marge absorbe d'abord le débordement : on ne coupe pas un exercice en cours. Ensuite, l'atelier.</p>
 
   <div class="bloc">
-    <h3>Atelier · à quel niveau va cette correction que je répète ?</h3>
+    <h3>Atelier · à quel niveau va cette correction ?</h3>
     <figure class="schema">
       <svg viewBox="0 0 760 256" role="img" aria-labelledby="sch-escalade-3">
         <title id="sch-escalade-3">Où ranger une correction : le brief, le contexte permanent, une skill, ou au-delà un script ou un hook</title>
@@ -1203,13 +1211,13 @@ N'enregistre rien, ne pousse rien et n'ouvre pas encore de PR : ma demande pour 
         <text x="404" y="104" font-size="20" class="tt f-encre">Une skill</text>
         <text x="404" y="156" font-size="15" class="f-doux">si l'agent ne sait pas</text><text x="404" y="176" font-size="15" class="f-doux">déjà le faire</text>
         <text x="598" y="64" font-size="20" class="tt f-encre">Script</text><text x="598" y="88" font-size="20" class="tt f-encre">ou hook</text>
-        <text x="598" y="116" font-size="15" class="f-doux">« aucun e-mail ne part</text><text x="598" y="136" font-size="15" class="f-doux">sans validation »</text>
+        <text x="598" y="116" font-size="14" class="f-doux">« aucun e-mail ne part</text><text x="598" y="136" font-size="14" class="f-doux">sans validation »</text>
       </svg>
     </figure>
     <ul class="cles">
-      <li>Repérez une correction que vous répétez, dans vos vraies conversations avec Claude.</li>
+      <li>Repérez une <strong>correction que vous répétez</strong>, dans vos vraies conversations avec Claude.</li>
       <li>Rangez-la au bon niveau de l'<strong>escalade brief → contexte permanent → skill</strong>.</li>
-      <li>Écrivez la phrase exacte que vous mettriez dans votre brief ou votre CLAUDE.md, et dites-la aux autres.</li>
+      <li>Écrivez la phrase exacte, et dites-la aux autres.</li>
     </ul>
     <ol class="etapes">
       <li><strong>Repérez une correction que vous répétez.</strong> Parcourez vos dernières conversations avec Claude (sur claude.ai ou dans T3 Code) et cherchez ce que vous avez dû redire : un ton, une longueur, un format, une donnée qu'il invente. Le prompt link ci-dessous vous aide à les repérer.</li>
@@ -1251,7 +1259,7 @@ N'écris rien dans les fichiers : c'est moi qui choisirai ce que je garde.</pre>
   <p class="chapeau">Les mots du cours, employés tels quels dans les supports, les exercices et par les agents.</p>
   <div class="bloc">
     <h3>Les dix termes</h3>
-    <div class="tableau">
+    <div class="tableau pres">
     <table>
       <thead><tr><th>Terme</th><th>Ce qu'il veut dire</th></tr></thead>
       <tbody>
