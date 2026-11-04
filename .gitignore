@@ -8,3 +8,6 @@ video/out/
 *.mov
 *.webm
 planche-contact*.png
+
+# Rendus de la proposition (PDF et images) : ils circulent par Drive ou Chat, pas par Git
+proposition/**/rendu/
