@@ -5,7 +5,7 @@
 //   - repo vaut KatalyxOrg/klass-atelier-agents ;
 //   - provider vaut claude et model vaut claude-sonnet-5-5 (les liens sont pour les associés) ;
 //   - aucun caractère invisible, ni dans le lien ni dans le prompt décodé.
-// Tant qu'aucun lien n'est posé (emplacements « à venir »), le point passe à vide.
+// Chaque emplacement data-prompt-link de index.html doit porter son lien.
 
 import { Ecart, fichiersSuivis, lireTexte } from '../outils.mjs';
 
@@ -86,10 +86,14 @@ export default {
   numero: 7,
   titre: 'Prompt links (8 000 caractères, repo, modèle, aucun caractère invisible)',
   async verifier({ dossier }) {
-    const liens = trouverPromptLinks(dossier);
-    if (liens.length === 0) {
-      return 'Aucun prompt link posé pour l\'instant (emplacements « à venir ») : rien à contrôler.';
+    const page = lireTexte(dossier, 'index.html') ?? '';
+    const emplacements = [...page.matchAll(/<p class="prompt-link" data-prompt-link="([^"]+)">(.*?)<\/p>/g)];
+    const vides = emplacements.filter((m) => !/<a href="https?:\/\/app\.t3\.codes\//.test(m[2])).map((m) => m[1]);
+    if (vides.length) {
+      throw new Ecart(`Emplacements de prompt link sans lien dans index.html : ${vides.join(', ')}. Lancez node outils/prompt-links/generer.mjs.`);
     }
+    const liens = trouverPromptLinks(dossier);
+    if (liens.length === 0) throw new Ecart('Aucun prompt link dans le dépôt.');
     const fautifs = [];
     for (const lien of liens) {
       const ecarts = ecartsDuLien(lien);
