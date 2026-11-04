@@ -8,4 +8,4 @@ Le dossier d'exercices du cours. Il s'ouvre dans **T3 Code** : c'est l'agent qui
 - **Les parcours :** `proposition/` et `video/`.
 - **Le kit de la charte Klass :** `klass/`.
 
-Pour le formateur : `npm run verifier-atelier` contrôle l'atelier depuis un clone vierge du dépôt distant (voir `outils/verifier-atelier/README.md`).
+Pour le formateur : les prompt links de la séance sont rassemblés dans `outils/prompt-links/README.md`, et `npm run verifier-atelier` contrôle l'atelier depuis un clone vierge du dépôt distant (voir `outils/verifier-atelier/README.md`).
